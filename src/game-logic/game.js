@@ -13,18 +13,18 @@ export default class Game {
     constructor(ctx) {
         this.ctx = ctx;
         this.originCords = [0, 0];
-        this.loadMap(TestSeed); // load default test map
+        this.loadMap(); // load default test map with no argument
         this.frameTimer = setInterval(() => { this.update() }, 20) // update every frame at 50 frames per second -- Can be replaced with window.requestAnimationFrame()
     };
 
-    loadMap(seed) {
+    loadMap(seed = TestSeed) {
         this.map = new Map(seed);
     };
 
     update() {
-        console.log("frame passed");
-        //update() -- update all positions, statuses, apply physics, etc
+        //logicStep() -- update all positions, statuses, apply physics, etc
         this.drawFrame(this.ctx, this.map, this.originCords); // draw everything on the map relative to the originCords
+        console.log("frame passed");
     };
 
     drawFrame(ctx, map, originCords) {

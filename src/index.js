@@ -15,9 +15,9 @@ console.log(game);
 
 
 //Import and run test demo
-import * as Test from './game-logic/testing/test.js'
+import * as Demo from './game-logic/testing/demo.js'
 // Test.loadTestMsg()
-Test.translateDemo();
+Demo.translateDemo();
 
 
 console.log("src/index.js finished loading through dist/main.js");
