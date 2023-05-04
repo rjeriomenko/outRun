@@ -1,3 +1,5 @@
+console.log("test.js started loading");
+
 //testing
 const canvas = document.getElementById("view");
 const ctx = canvas.getContext("2d");
@@ -67,3 +69,5 @@ export function translateDemo() {
         j += 1000;
     };
 }
+
+console.log("test.js finished loading");
