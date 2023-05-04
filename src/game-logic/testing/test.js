@@ -8,11 +8,11 @@ let originCords = [0, 0];
 function drawGuidelines() {
     //midline vertical
     ctx.fillStyle = "black";
-    ctx.fillRect(250, 0, 1, 500)
+    ctx.fillRect(250, 0, 1, 500);
 
     //midline horizontal
     ctx.fillStyle = "black";
-    ctx.fillRect(0, 250, 500, 1)
+    ctx.fillRect(0, 250, 500, 1);
 
     //first quarter square
     ctx.fillStyle = "black";
@@ -27,7 +27,7 @@ function drawGuidelines() {
 
     //out of view square
     ctx.fillStyle = "blue";
-    ctx.fillRect(-125, -125, 50, 50)
+    ctx.fillRect(-125, -125, 50, 50);
 }
 
 function drawFrame(x = 50, y = 50) {
@@ -57,7 +57,7 @@ export function translateDemo() {
         setTimeout(() => {
             console.log("timeout complete");
             drawFrame();
-        }, j)
+        }, j);
         j += 1000;
     };
 
@@ -65,7 +65,7 @@ export function translateDemo() {
         setTimeout(() => {
             console.log("timeout complete");
             drawFrame(-50, -50);
-        }, j)
+        }, j);
         j += 1000;
     };
 }

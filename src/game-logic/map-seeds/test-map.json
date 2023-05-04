@@ -1,0 +1,7 @@
+{
+    "entities": {
+        "entity1": "entity1properties",
+        "entity2": "entity2properties"
+    },
+    "background": "image"
+}

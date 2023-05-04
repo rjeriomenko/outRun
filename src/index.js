@@ -1,10 +1,10 @@
 console.log("src/index.js started loading through dist/main.js");
 
 //imports
-import Game from './game.js'
+import Game from './game-logic/game.js';
 
-let game = new Game()
-console.log(game)
+let game = new Game();
+console.log(game);
 
 //unknown if needed
 //get canvas context
@@ -13,8 +13,11 @@ console.log(game)
 // let originCords = [0, 0];
 
 
+
+
+
 //Import and run test demo
-import * as Test from './test.js'
+import * as Test from './game-logic/testing/test.js'
 // Test.loadTestMsg()
 Test.translateDemo();
 
