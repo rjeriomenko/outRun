@@ -1,16 +1,14 @@
 console.log("src/index.js started loading through dist/main.js");
-
-//imports
 import Game from './game-logic/game.js';
 
-let game = new Game();
+//Get canvas and context
+const canvas = document.getElementById("view");
+const ctx = canvas.getContext("2d");
+
+//Start game
+let game = new Game(ctx);
 console.log(game);
 
-//unknown if needed
-//get canvas context
-// const canvas = document.getElementById("view");
-// const ctx = canvas.getContext("2d");
-// let originCords = [0, 0];
 
 
 

@@ -1,9 +1,13 @@
+//This will populate a map with a seed
+
 console.log("map.js started loading");
-import mapSeed from './map-seed-loader.js'
+import mapSeedEntityLoader from './map-seed-entity-loader.js';
 
 export default class Map {
     constructor (seed) {
-        this.seed = new mapSeed(seed) // PARSED JSON SEED DATA
+        this.background = seed.background;
+        this.seededEntities = new mapSeedEntityLoader(seed.entities); // allows player to reset map with seeded entities at any time
+        this.entities = this.seededEntities.entities;
     };
 }
 
