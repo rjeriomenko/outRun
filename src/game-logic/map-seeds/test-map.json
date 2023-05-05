@@ -40,9 +40,18 @@
             "sprite": "spriteurl",
             "color": "red"
         },
-        "out-of-view-square": {
+        "out-of-view-square1": {
             "absolutepositionx": -125,
             "absolutepositiony": -125,
+            "dimensionx": 50,
+            "dimensiony": 50,
+            "sprite": "spriteurl",
+            "color": "blue",
+            "collide": true
+        },
+        "out-of-view-square2": {
+            "absolutepositionx": 600,
+            "absolutepositiony": 125,
             "dimensionx": 50,
             "dimensiony": 50,
             "sprite": "spriteurl",
@@ -84,6 +93,16 @@
             "sprite": "spriteurl",
             "color": "gray",
             "collide": true
+        },
+        "zombie1": {
+            "absolutepositionx": 0,
+            "absolutepositiony": 500,
+            "dimensionx": 30,
+            "dimensiony": 30,
+            "sprite": "spriteurl",
+            "color": "green",
+            "collide": true,
+            "behavior": "follow"
         }
     },
     "background": {

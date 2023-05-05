@@ -11,7 +11,7 @@ import TestSeed from './map-seeds/test-map.json';
 import Camera from './camera.js';
 import Player from './player.js';
 import FrameQueue from './frame-queue.js'
-import KeyboardWords from './keyboard-words.json'
+import KeyboardWords from './keyboard-words.json' //////SHOULD ADD A KEYBOARD CLASS
 
 export default class Game {
     constructor(ctx, canvas) {
@@ -36,10 +36,21 @@ export default class Game {
         console.log("frame passed");
     };
 
+    moveEntities() {
+        for(const entity in this.map.entities) {
+            let ent = this.map.entities[entity]
+            console.log(ent)
+            if(ent.behavior) {
+                this.frameQueue.push(() => {ent.move});
+            };
+        };
+    };
+
     logicStep() {
-        this.frameQueue.frameQueueExecute()
+        this.moveEntities();
+        this.frameQueue.frameQueueExecute();
         this.camera.followEntity(); // update camera to new follow coordinates
-    }
+    };
 
     drawFrame(ctx, canvas, map) {
         new Render(ctx, canvas, map);
@@ -78,7 +89,7 @@ export default class Game {
     removeKey(e) {
         let k = e.key;
         this.frameQueue.everyQueueDel(`${KeyboardWords[k]}`);
-    }
+    };
 }
 
 
