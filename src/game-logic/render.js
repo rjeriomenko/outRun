@@ -1,13 +1,25 @@
 console.log("render.js started loading");
 export default class Render {
-    constructor(ctx, map, originCords) {
+    constructor(ctx, canvas, map) {
         this.ctx = ctx;
+        this.canvas = canvas;
         this.map = map;
-        this.originCords = originCords;
         this.drawMap(map);
     }
 
+    originCoords() {
+        let currentTransform = this.ctx.getTransform()
+        return [currentTransform.e, currentTransform.f];
+    };
+    
+    clearMap() {
+        let [originCoordX, originCoordY] = this.originCoords()
+        // this.ctx.clearRect(originCoordX, originCoordY, this.canvas.width, this.canvas.height);   //NOT CLEARING CORRECTLY AT THE MOMENT
+        this.ctx.clearRect(-9000, -9000, 90000, 90000);   //NOT CLEARING CORRECTLY AT THE MOMENT
+    }
+
     drawMap(map) {
+        this.clearMap()
         for(const entityId in map.entities) {
             const entityProperties = map.entities[entityId]
             let posX, posY, dimX, dimY
@@ -17,10 +29,15 @@ export default class Render {
                 entityProperties.dimension[0],
                 entityProperties.dimension[1],
             ]
+            if(entityId !== "player") {
+                this.ctx.fillStyle = entityProperties.color;
+                this.ctx.fillRect(posX, posY, dimX, dimY);
+            }
 
-            this.ctx.fillStyle = entityProperties.color;
+            this.ctx.fillStyle = entityProperties.color; //Making sure the player renders last
             this.ctx.fillRect(posX, posY, dimX, dimY);
         }
     }
+
 }
 console.log("render.js finished loading");

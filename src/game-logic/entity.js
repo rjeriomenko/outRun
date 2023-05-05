@@ -22,6 +22,13 @@ export default class Entity {
         }
         return [x, y];
     }
+
+    move(distanceXY) {
+        this.absolutePosition = [
+        this.absolutePosition[0] + distanceXY[0],
+        this.absolutePosition[1] + distanceXY[1]
+        ]
+    }
     
 }
 

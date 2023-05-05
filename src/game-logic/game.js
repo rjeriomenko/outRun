@@ -8,28 +8,38 @@ console.log("game.js started loading");
 import Map from './map.js';
 import Render from './render.js';
 import TestSeed from './map-seeds/test-map.json';
+import Camera from './camera.js';
+import Player from './player.js';
 
 export default class Game {
-    constructor(ctx) {
+    constructor(ctx, canvas) {
         this.ctx = ctx;
-        this.originCords = [0, 0];
-        this.loadMap(); // load default test map with no argument
-        this.frameTimer = setInterval(() => { this.update() }, 20) // update every frame at 50 frames per second -- Can be replaced with window.requestAnimationFrame()
+        this.canvas = canvas;
+        this.player = new Player();
+        this.loadMap(this.player); // load default test map with default player
+        this.camera = new Camera(ctx, canvas, this.player);
+        this.frameTimer = setInterval(() => { this.update() }, 20); // update every frame at 50 frames per second -- Can be replaced with window.requestAnimationFrame()
     };
 
-    loadMap(seed = TestSeed) {
-        this.map = new Map(seed);
+    loadMap(player, seed = TestSeed) {
+        this.map = new Map(player, seed);
     };
 
     update() {
-        //logicStep() -- update all positions, statuses, apply physics, etc
-        this.drawFrame(this.ctx, this.map, this.originCords); // draw everything on the map relative to the originCords
+        this.logicStep(); //update camera, all positions, statuses, apply physics, etc
+        this.drawFrame(this.ctx, this.canvas, this.map); // draw everything on the map
         console.log("frame passed");
     };
 
-    drawFrame(ctx, map, originCords) {
-        new Render(ctx, map, originCords);
+    logicStep() {
+        this.player.move([1, 5]);
+        this.camera.followEntity(); // update camera to new follow coordinates
+    }
+
+    drawFrame(ctx, canvas, map) {
+        new Render(ctx, canvas, map);
     };
+
 }
 
 

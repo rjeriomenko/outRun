@@ -15,6 +15,38 @@
             "dimensiony": 1,
             "sprite": "spriteurl",
             "color": "black"
+        },
+        "first-quarter-square": {
+            "absolutepositionx": 0,
+            "absolutepositiony": 0,
+            "dimensionx": 250,
+            "dimensiony": 250,
+            "sprite": "spriteurl",
+            "color": "black"
+        },
+        "center-square-black": {
+            "absolutepositionx": 225,
+            "absolutepositiony": 225,
+            "dimensionx": 50,
+            "dimensiony": 50,
+            "sprite": "spriteurl",
+            "color": "black"
+        },
+        "center-square-red": {
+            "absolutepositionx": 245,
+            "absolutepositiony": 245,
+            "dimensionx": 10,
+            "dimensiony": 10,
+            "sprite": "spriteurl",
+            "color": "red"
+        },
+        "out-of-view-square": {
+            "absolutepositionx": -125,
+            "absolutepositiony": -125,
+            "dimensionx": 50,
+            "dimensiony": 50,
+            "sprite": "spriteurl",
+            "color": "blue"
         }
     },
     "background": "image"
