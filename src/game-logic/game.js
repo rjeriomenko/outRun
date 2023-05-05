@@ -36,18 +36,17 @@ export default class Game {
         console.log("frame passed");
     };
 
-    moveEntities() {
+    moveEnemies() {
         for(const entity in this.map.entities) {
             let ent = this.map.entities[entity]
-            console.log(ent)
             if(ent.behavior) {
-                this.frameQueue.push(() => {ent.move});
+                this.frameQueue.push(() => {ent.move()});
             };
         };
     };
 
     logicStep() {
-        this.moveEntities();
+        this.moveEnemies();
         this.frameQueue.frameQueueExecute();
         this.camera.followEntity(); // update camera to new follow coordinates
     };

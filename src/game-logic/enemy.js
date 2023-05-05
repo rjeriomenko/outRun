@@ -2,15 +2,15 @@ console.log("enemy.js started loading");
 import Entity from './entity.js';
 
 export default class Enemy extends Entity {
-    constructor(entityName, entityProperties) {
-        super(entityName, entityProperties)
-        this.behavior = entityProperties.behavior
+    constructor(enemyName, enemyProperties) {
+        super(enemyName, enemyProperties)
+        this.behavior = enemyProperties.behavior
     }
 
     move() {
         switch(this.behavior) {
             case "follow":
-                console.log("kek")
+                // console.log("kek")
                 break;
         }
     };
