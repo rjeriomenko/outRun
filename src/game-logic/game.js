@@ -18,7 +18,7 @@ export default class Game {
         this.player = new Player();
         this.loadMap(this.player); // load default test map with default player
         this.camera = new Camera(ctx, canvas, this.player);
-        this.frameTimer = setInterval(() => { this.update() }, 20); // update every frame at 50 frames per second -- Can be replaced with window.requestAnimationFrame()
+        this.frameTimer = setInterval(() => { this.update() }, (1000/60)); // update every frame at 50 frames per second -- Can be replaced with window.requestAnimationFrame()
     };
 
     loadMap(player, seed = TestSeed) {
@@ -32,7 +32,7 @@ export default class Game {
     };
 
     logicStep() {
-        this.player.move([1, 5]);
+        this.player.move([-1, -1]);
         this.camera.followEntity(); // update camera to new follow coordinates
     }
 

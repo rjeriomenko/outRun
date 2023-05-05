@@ -14,8 +14,7 @@ export default class Render {
     
     clearMap() {
         let [originCoordX, originCoordY] = this.originCoords()
-        // this.ctx.clearRect(originCoordX, originCoordY, this.canvas.width, this.canvas.height);   //NOT CLEARING CORRECTLY AT THE MOMENT
-        this.ctx.clearRect(-9000, -9000, 90000, 90000);   //NOT CLEARING CORRECTLY AT THE MOMENT
+        this.ctx.clearRect(-originCoordX, -originCoordY, this.canvas.width, this.canvas.height);
     }
 
     drawMap(map) {
