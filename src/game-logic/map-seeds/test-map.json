@@ -48,6 +48,42 @@
             "sprite": "spriteurl",
             "color": "blue",
             "collide": true
+        },
+        "arena-wall-left": {
+            "absolutepositionx": -500,
+            "absolutepositiony": -500,
+            "dimensionx": 50,
+            "dimensiony": 1500,
+            "sprite": "spriteurl",
+            "color": "gray",
+            "collide": true
+        },
+        "arena-wall-right": {
+            "absolutepositionx": 1000,
+            "absolutepositiony": -500,
+            "dimensionx": 50,
+            "dimensiony": 1500,
+            "sprite": "spriteurl",
+            "color": "gray",
+            "collide": true
+        },
+        "arena-wall-top": {
+            "absolutepositionx": -500,
+            "absolutepositiony": -500,
+            "dimensionx": 1500,
+            "dimensiony": 50,
+            "sprite": "spriteurl",
+            "color": "gray",
+            "collide": true
+        },
+        "arena-wall-bottom": {
+            "absolutepositionx": -500,
+            "absolutepositiony": 950,
+            "dimensionx": 1500,
+            "dimensiony": 50,
+            "sprite": "spriteurl",
+            "color": "gray",
+            "collide": true
         }
     },
     "background": "image"
