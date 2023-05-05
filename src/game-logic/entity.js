@@ -8,6 +8,7 @@ export default class Entity {
         this.dimension = this.parseXY(entityProperties, "dim")
         this.sprite = entityProperties.sprite
         this.color = entityProperties.color
+        this.speed = entityProperties.speed
     }
 
     parseXY(entityProperties, attribute = "pos") {
@@ -25,8 +26,8 @@ export default class Entity {
 
     move(distanceXY) {
         this.absolutePosition = [
-        this.absolutePosition[0] + distanceXY[0],
-        this.absolutePosition[1] + distanceXY[1]
+        this.absolutePosition[0] + (distanceXY[0] * this.speed),
+        this.absolutePosition[1] + (distanceXY[1] * this.speed)
         ]
     }
     

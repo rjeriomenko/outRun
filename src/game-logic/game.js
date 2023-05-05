@@ -22,6 +22,7 @@ export default class Game {
         this.frameQueue = new FrameQueue
         this.frameTimer = setInterval(() => { this.update() }, (1000/60)); // update every frame at 60 frames per second -- Can be replaced with window.requestAnimationFrame()
         window.addEventListener('keydown', (e) => { this.moveKey(e) }, false)
+        window.addEventListener('keyup', (e) => { this.removeKey(e) }, false)
     };
 
     loadMap(player, seed = TestSeed) {
@@ -46,30 +47,34 @@ export default class Game {
     moveKey(e) {
         switch (e.key) {
             case "ArrowUp":
-                this.player.move([0, -5]);
+            case "w":
+                if(!e.repeat) {
+                this.frameQueue.everyQueuePush(`${e.key}`, () => {this.player.move([0, -0.5])});
+                }
                 break;
             case "ArrowRight":
-                this.player.move([5, 0]);
+            case "d":
+                if (!e.repeat) {
+                    this.frameQueue.everyQueuePush(`${e.key}`, () => { this.player.move([0.5, 0]) });
+                }
                 break;
             case "ArrowDown":
-                this.player.move([0, 5]);
+            case "s":
+                if (!e.repeat) {
+                    this.frameQueue.everyQueuePush(`${e.key}`, () => { this.player.move([0, 0.5]) });
+                }
                 break;
             case "ArrowLeft":
-                this.player.move([-5, 0]);
-                break;
-            case "w":
-                this.player.move([0, -5]);
-                break;
-            case "d":
-                this.player.move([5, 0]);
-                break;
-            case "s":
-                this.player.move([0, 5]);
-                break;
             case "a":
-                this.player.move([-5, 0]);
+                if (!e.repeat) {
+                    this.frameQueue.everyQueuePush(`${e.key}`, () => { this.player.move([-0.5, 0]) });
+                }
                 break;
         }
+    }
+
+    removeKey(e) {
+        this.frameQueue.everyQueueDel(`${e.key}`);
     }
 }
 

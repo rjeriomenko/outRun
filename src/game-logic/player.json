@@ -3,5 +3,6 @@
     "absolutepositiony": 230,
     "dimensionx": 40,
     "dimensiony": 40,
-    "sprite": "spriteurl"
+    "sprite": "spriteurl",
+    "speed": 10
 }
