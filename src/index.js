@@ -13,7 +13,6 @@ console.log(game);
 
 
 
-
 //Import and run test demo
 // import * as Demo from './game-logic/testing/demo.js'
 // Demo.translateDemo();

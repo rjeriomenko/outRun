@@ -10,6 +10,7 @@ import Render from './render.js';
 import TestSeed from './map-seeds/test-map.json';
 import Camera from './camera.js';
 import Player from './player.js';
+import FrameQueue from './frame-queue.js'
 
 export default class Game {
     constructor(ctx, canvas) {
@@ -18,7 +19,9 @@ export default class Game {
         this.player = new Player();
         this.loadMap(this.player); // load default test map with default player
         this.camera = new Camera(ctx, canvas, this.player);
-        this.frameTimer = setInterval(() => { this.update() }, (1000/60)); // update every frame at 50 frames per second -- Can be replaced with window.requestAnimationFrame()
+        this.frameQueue = new FrameQueue
+        this.frameTimer = setInterval(() => { this.update() }, (1000/60)); // update every frame at 60 frames per second -- Can be replaced with window.requestAnimationFrame()
+        window.addEventListener('keydown', (e) => { this.moveKey(e) }, false)
     };
 
     loadMap(player, seed = TestSeed) {
@@ -32,7 +35,7 @@ export default class Game {
     };
 
     logicStep() {
-        this.player.move([-1, -1]);
+        this.frameQueue.frameQueueExecute()
         this.camera.followEntity(); // update camera to new follow coordinates
     }
 
@@ -40,6 +43,34 @@ export default class Game {
         new Render(ctx, canvas, map);
     };
 
+    moveKey(e) {
+        switch (e.key) {
+            case "ArrowUp":
+                this.player.move([0, -5]);
+                break;
+            case "ArrowRight":
+                this.player.move([5, 0]);
+                break;
+            case "ArrowDown":
+                this.player.move([0, 5]);
+                break;
+            case "ArrowLeft":
+                this.player.move([-5, 0]);
+                break;
+            case "w":
+                this.player.move([0, -5]);
+                break;
+            case "d":
+                this.player.move([5, 0]);
+                break;
+            case "s":
+                this.player.move([0, 5]);
+                break;
+            case "a":
+                this.player.move([-5, 0]);
+                break;
+        }
+    }
 }
 
 
