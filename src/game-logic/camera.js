@@ -26,7 +26,6 @@ export default class Camera {
         ];
     }
 
-
     followEntity() {
         let entityCenterCoords = this.findEntityCenterCoords(this.following);
         let cameraCoords = this.currentCameraCoords()

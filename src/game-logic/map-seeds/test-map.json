@@ -46,7 +46,8 @@
             "dimensionx": 50,
             "dimensiony": 50,
             "sprite": "spriteurl",
-            "color": "blue"
+            "color": "blue",
+            "collide": true
         }
     },
     "background": "image"

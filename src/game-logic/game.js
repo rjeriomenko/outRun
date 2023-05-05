@@ -22,7 +22,7 @@ export default class Game {
         this.camera = new Camera(ctx, canvas, this.player);
         this.frameQueue = new FrameQueue
         this.frameTimer = setInterval(() => { this.update() }, (1000/60)); // update every frame at 60 frames per second -- Can be replaced with window.requestAnimationFrame()
-        window.addEventListener('keydown', (e) => { this.moveKey(e) }, false)
+        window.addEventListener('keydown', (e) => { this.moveKey(e) }, false) // make repeat player movement browser-agnostic
         window.addEventListener('keyup', (e) => { this.removeKey(e) }, false)
     };
 
