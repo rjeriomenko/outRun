@@ -55,10 +55,19 @@ export default class Entity {
         ];
 
         if (this.collide) {
-            //collide logic
-            // console.log("kek")
             while (this.anyColliding(targetPosition)) {
-                //move at 0.9 distance or so
+                const buffer = 1 // Smallest space possible between two colliding objects
+                let deltaX = targetPosition[0] - this.absolutePosition[0];
+                let deltaY = targetPosition[1] - this.absolutePosition[1];
+                if (Math.abs(deltaX) < buffer && Math.abs(deltaY) < buffer) {
+                    targetPosition = this.absolutePosition;
+                    break;
+                } else {
+                    targetPosition = [
+                        this.absolutePosition[0] + deltaX * 0.9,
+                        this.absolutePosition[1] + deltaY * 0.9
+                    ];
+                };
             };
         };
 
@@ -66,19 +75,16 @@ export default class Entity {
     }
 
     anyColliding(targetPosition){
-        // console.log("kek")
         for (const entity in this.map.entities) {
             let ent = this.map.entities[entity]
-            if(this !== ent && ent.collide && this.colliding(ent)) {
-                console.log("kek")
-                debugger
+            if (this !== ent && ent.collide && this.collidingWithEntityAtCoord(ent, targetPosition)) {
                 return true;
             };
         };
     };
 
-    colliding(targetEntity) {
-        let pos1 = this.absolutePosition;
+    collidingWithEntityAtCoord(targetEntity, targetPosition) {
+        let pos1 = targetPosition
         let pos2 = targetEntity.absolutePosition;
         let dim1 = this.dimension;
         let dim2 = targetEntity.dimension;
