@@ -79,12 +79,17 @@
         "arena-wall-bottom": {
             "absolutepositionx": -500,
             "absolutepositiony": 950,
-            "dimensionx": 1500,
+            "dimensionx": 1550,
             "dimensiony": 50,
             "sprite": "spriteurl",
             "color": "gray",
             "collide": true
         }
     },
-    "background": "image"
+    "background": {
+        "src": "./game-logic/images/grass.png",
+        "absolutepositionx": -500,
+        "absolutepositiony": 0,
+        "attribution": "realistic PNG Designed By Sweet Dream from https://pngtree.com/freepng/grass-realistic-green-nature_8285072.html?sol=downref&id=bef"
+    }
 }
