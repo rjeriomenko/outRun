@@ -11,6 +11,7 @@ import TestSeed from './map-seeds/test-map.json';
 import Camera from './camera.js';
 import Player from './player.js';
 import FrameQueue from './frame-queue.js'
+import KeyboardWords from './keyboard-words.json'
 
 export default class Game {
     constructor(ctx, canvas) {
@@ -45,36 +46,38 @@ export default class Game {
     };
 
     moveKey(e) {
-        switch (e.key) {
+        let k = e.key;
+        switch (k) {
             case "ArrowUp":
             case "w":
                 if(!e.repeat) {
-                this.frameQueue.everyQueuePush(`${e.key}`, () => {this.player.move([0, -0.5])});
+                this.frameQueue.everyQueuePush(`${KeyboardWords[k]}`, () => {this.player.move([0, -1])});
                 }
                 break;
             case "ArrowRight":
             case "d":
                 if (!e.repeat) {
-                    this.frameQueue.everyQueuePush(`${e.key}`, () => { this.player.move([0.5, 0]) });
+                    this.frameQueue.everyQueuePush(`${KeyboardWords[k]}`, () => { this.player.move([1, 0]) });
                 }
                 break;
             case "ArrowDown":
             case "s":
                 if (!e.repeat) {
-                    this.frameQueue.everyQueuePush(`${e.key}`, () => { this.player.move([0, 0.5]) });
+                    this.frameQueue.everyQueuePush(`${KeyboardWords[k]}`, () => { this.player.move([0, 1]) });
                 }
                 break;
             case "ArrowLeft":
             case "a":
                 if (!e.repeat) {
-                    this.frameQueue.everyQueuePush(`${e.key}`, () => { this.player.move([-0.5, 0]) });
+                    this.frameQueue.everyQueuePush(`${KeyboardWords[k]}`, () => { this.player.move([-1, 0]) });
                 }
                 break;
         }
     }
 
     removeKey(e) {
-        this.frameQueue.everyQueueDel(`${e.key}`);
+        let k = e.key;
+        this.frameQueue.everyQueueDel(`${KeyboardWords[k]}`);
     }
 }
 

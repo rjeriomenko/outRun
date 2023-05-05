@@ -31,7 +31,7 @@ The game renders in Canvas and its logic is handled by Node in the browser. It u
 
 Implementation Timeline
 Friday Afternoon & Weekend
-Allow for user keyboard input to move character. Create entity collision detection that prevents player movement. Set up basic background image for the map. Adjust canvas height and width if necssary. Switch from setInterval() to requestAnimationFrame() if necessary. Install babel and sass dependencies.
+Allow for user keyboard input to move character. Create entity collision detection that prevents player movement. Set up basic background image for the map. Adjust canvas height and width if necessary. Switch from setInterval() to requestAnimationFrame() if necessary. Install babel and sass dependencies.
 
 Monday
 Create enemy class. Create enemy generation functionality. Give enemies basic AI to pursue player character. Allow enemies to damage player health. Create ability class. Create ability class. Allow player abilities to automatically damage enemies. Reward player with experience as enemies are defeated.
