@@ -32,7 +32,6 @@ export default class mapSeedEntityLoader {
                     enemyInstance = new Zombie(enemyName, enemy);
                     break;
             }
-            
             entitiesObject[id] = enemyInstance;
             id++;
         }

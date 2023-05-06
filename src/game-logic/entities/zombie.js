@@ -26,12 +26,7 @@ export default class Zombie extends Enemy {
             deltaY /= biggerSide
         }
 
-
-
-        console.log([deltaX, deltaY])
         return [deltaX, deltaY]
-
-        
     }
 }
 console.log("zombie.js finished loading");

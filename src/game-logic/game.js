@@ -9,16 +9,17 @@ import Map from './map.js';
 import Render from './render.js';
 import TestSeed from './map-seeds/test-map.json';
 import Camera from './camera.js';
-import Player from './player.js';
-import FrameQueue from './frame-queue.js'
-import KeyboardWords from './keyboard-words.json' //////SHOULD ADD A KEYBOARD CLASS
+import Player from './entities/player.js';
+import FrameQueue from './frame-queue.js';
+import KeyboardWords from './keyboard-words.json'; //Should consider adding a keyboard class
 
 export default class Game {
     constructor(ctx, canvas) {
         this.ctx = ctx;
         this.canvas = canvas;
-        this.player = new Player();
-        this.loadMap(this.player); // load default test map with default player
+        this.loadMap(); // load default test map with default player
+        this.player = new Player(this.map);
+        this.map.addPlayer(this.player)
         this.camera = new Camera(ctx, canvas, this.player);
         this.frameQueue = new FrameQueue
         this.frameTimer = setInterval(() => { this.update() }, (1000/60)); // update every frame at 60 frames per second -- Can be replaced with window.requestAnimationFrame()
@@ -26,8 +27,8 @@ export default class Game {
         window.addEventListener('keyup', (e) => { this.removeKey(e) }, false)
     };
 
-    loadMap(player, seed = TestSeed) {
-        this.map = new Map(player, seed);
+    loadMap(seed = TestSeed) {
+        this.map = new Map(seed);
     };
 
     update() {
@@ -36,17 +37,36 @@ export default class Game {
         console.log("frame passed");
     };
 
+    activateAbilities() {
+        for(const ability in this.player.abilities) {
+            let abt = this.player.abilities[ability]
+            this.frameQueue.push(() => { abt.activate() });
+        };
+    }
+    
     moveEnemies() {
         for(const entity in this.map.entities) {
-            let ent = this.map.entities[entity]
+            let ent = this.map.entities[entity];
             if(ent.enemyType) {
-                this.frameQueue.push(() => {ent.move()});
+                this.frameQueue.push(() => { ent.move() });
             };
         };
     };
+    
+    moveProjectiles() {
+        for (const entity in this.map.entities) {
+            let ent = this.map.entities[entity];
+            if (ent.projectileType) {
+                this.frameQueue.push(() => { ent.move() });
+            };
+        };
+
+    }
 
     logicStep() {
+        this.activateAbilities();
         this.moveEnemies();
+        this.moveProjectiles();
         this.frameQueue.frameQueueExecute();
         this.camera.followEntity(); // update camera to new follow coordinates
     };

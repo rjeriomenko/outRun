@@ -76,7 +76,7 @@ export default class Entity {
 
     anyColliding(targetPosition){
         for (const entity in this.map.entities) {
-            let ent = this.map.entities[entity]
+            let ent = this.map.entities[entity];
             if (this !== ent && ent.collide && this.collidingWithEntityAtCoord(ent, targetPosition)) {
                 return true;
             };
@@ -84,7 +84,7 @@ export default class Entity {
     };
 
     collidingWithEntityAtCoord(targetEntity, targetPosition) {
-        let pos1 = targetPosition
+        let pos1 = targetPosition;
         let pos2 = targetEntity.absolutePosition;
         let dim1 = this.dimension;
         let dim2 = targetEntity.dimension;
@@ -103,9 +103,35 @@ export default class Entity {
             return true;
         };
     };
-    
+
+    closestEnemy() {
+        let entities = this.map.entities;
+        let enemyExist = false;
+        let shortestDistance = 0;
+        let enemy = this; //If no enemies exist, return self
+
+        for(const entity in entities) {
+            let ent = entities[entity];
+            if(ent.enemyType) {
+                enemyExist = true;
+                let distance = this.distanceToEnemy(ent);
+                if(distance < shortestDistance || !shortestDistance) {
+                    shortestDistance = distance;
+                    enemy = ent;
+                }
+            }
+        }
+
+        return enemy;
+    }
+
+    distanceToEnemy(enemy) {
+        let position = this.absolutePosition;
+        let enemyPosition = this.findEntityCenterCoords(enemy);
+        let deltaX = enemyPosition[0] - position[0];
+        let deltaY = enemyPosition[1] - position[1];
+
+        return Math.sqrt(deltaX ** 2 + deltaY ** 2);
+    }
 }
-
-
-
 console.log("entity.js finished loading");

@@ -34,7 +34,7 @@ Friday Afternoon & Weekend
 Allow for user keyboard input to move character. Create entity collision detection that prevents player movement. Set up basic background image for the map. Adjust canvas height and width if necessary. Switch from setInterval() to requestAnimationFrame() if necessary. Install babel and sass dependencies.
 
 Monday
-Create enemy class. Create enemy generation functionality. Give enemies basic AI to pursue player character. Allow enemies to damage player health. Create ability class. Create ability class. Allow player abilities to automatically damage enemies. Reward player with experience as enemies are defeated.
+Create enemy class. Create enemy generation functionality. Give enemies basic AI to pursue player character. Allow enemies to damage player health. Create ability class. Allow player abilities to automatically damage enemies. Reward player with experience as enemies are defeated.
 
 Tuesday
 Create event class. Create levelUp event. Create more abilities that player can add to their player character on level-up. Tweak enemy count, health points, and number of environment objects to make game challenging.

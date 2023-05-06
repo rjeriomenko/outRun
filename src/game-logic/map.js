@@ -1,24 +1,36 @@
 //This will populate a map with a seed
-
 console.log("map.js started loading");
 import mapSeedEntityLoader from './map-seed-entity-loader.js';
 
 export default class Map {
-    constructor (player, seed) {
+    constructor (seed) {
         this.background = seed.background;
         this.seededEntities = new mapSeedEntityLoader(seed.entities); // allows player to reset map with seeded entities at any time
-        this.addSeededEntities(player)
+        this.addSeededEntities()
     };
 
-    addSeededEntities(player) {
+    addPlayer(player) {
+        this.entities.player = player
+    };
+
+    addSeededEntities() {
         this.entities = this.seededEntities.entities;
-        this.entities.player = player  //gives player unique entityId
         
         for(const entity in this.entities) {
-            this.entities[entity].map = this
-        }
-    }
+            this.entities[entity].map = this;
+        };
+    };
+
+    addEntity(entity) {
+        let highestId = 1;
+        for(const entityId in this.entities) {
+            if(entityId !== "player" && Number(entityId) > highestId) {
+                highestId = entityId + 1;
+            };
+        };
+
+        this.entities[highestId] = entity;
+        entity.map = this;
+    };
 }
-
-
 console.log("map.js finished loading");
