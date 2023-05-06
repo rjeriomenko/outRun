@@ -37,7 +37,7 @@ Monday
 Create enemy class. Create enemy generation functionality. Give enemies basic AI to pursue player character. Allow enemies to damage player health. Create ability class. Allow player abilities to automatically damage enemies. Reward player with experience as enemies are defeated.
 
 Tuesday
-Create event class. Create levelUp event. Create more abilities that player can add to their player character on level-up. Tweak enemy count, health points, and number of environment objects to make game challenging.
+Create event class. Create levelUp event. Create more abilities that player can add to their player character on level-up. Create more enemy types. Tweak enemy count, health points, and number of environment objects to make game challenging.
 
 Wednesday
 Give player character and enemies sprites. Create mainMenu event. Give background an image that reflects environment collision boxes. Create pauseMenu event. Implement background music that is toggleable.

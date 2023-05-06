@@ -106,14 +106,14 @@ export default class Entity {
 
     closestEnemy() {
         let entities = this.map.entities;
-        let enemyExist = false;
+        // let enemyExist = false;
         let shortestDistance = 0;
         let enemy = this; //If no enemies exist, return self
 
         for(const entity in entities) {
             let ent = entities[entity];
             if(ent.enemyType) {
-                enemyExist = true;
+                // enemyExist = true;
                 let distance = this.distanceToEnemy(ent);
                 if(distance < shortestDistance || !shortestDistance) {
                     shortestDistance = distance;
