@@ -39,7 +39,7 @@ export default class Game {
     moveEnemies() {
         for(const entity in this.map.entities) {
             let ent = this.map.entities[entity]
-            if(ent.behavior) {
+            if(ent.enemyType) {
                 this.frameQueue.push(() => {ent.move()});
             };
         };

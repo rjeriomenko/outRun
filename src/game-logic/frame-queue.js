@@ -25,9 +25,7 @@ export default class FrameQueue {
         };
 
         while(this.queue.length) {
-            debugger
             (this.queue.shift())()
-            debugger
         }
     };
 }

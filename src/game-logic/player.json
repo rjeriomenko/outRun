@@ -4,6 +4,6 @@
     "dimensionx": 40,
     "dimensiony": 40,
     "sprite": "spriteurl",
-    "speed": 10,
+    "speed": 8,
     "collide": true
 }

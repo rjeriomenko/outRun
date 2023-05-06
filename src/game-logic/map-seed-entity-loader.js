@@ -1,8 +1,9 @@
 //This will import all entities, all entity subclasses
 //This will create a seededEntities object (object with entity instances) from a seed
 console.log("map-seed-entity-loader.js started loading");
-import Entity from './entity.js';
-import Enemy from './enemy.js';
+import Entity from './entities/entity.js';
+import Bee from './entities/bee.js';
+import Zombie from './entities/zombie.js';
 
 export default class mapSeedEntityLoader {
     constructor(seedEntities) {
@@ -16,16 +17,27 @@ export default class mapSeedEntityLoader {
         for(const objectName in seedEntities.objects) {
             let object = new Entity(objectName, seedEntities.objects[objectName]);
             entitiesObject[id] = object;
-            id++
+            id++;
         }
 
         for(const enemyName in seedEntities.enemies) {
-            let enemy = new Enemy(enemyName, seedEntities.enemies[enemyName]);
-            entitiesObject[id] = enemy;
-            id++
+            let enemy = seedEntities.enemies[enemyName]
+            let enemyType = enemy.enemytype
+            let enemyInstance
+            switch (enemyType) {
+                case "bee":
+                    enemyInstance = new Bee(enemyName, enemy);
+                    break;
+                case "zombie":
+                    enemyInstance = new Zombie(enemyName, enemy);
+                    break;
+            }
+            
+            entitiesObject[id] = enemyInstance;
+            id++;
         }
 
         return entitiesObject;
-    }
+    };
 }
 console.log("map-seed-entity-loader.js finished loading");

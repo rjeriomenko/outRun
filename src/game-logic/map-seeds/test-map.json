@@ -97,16 +97,15 @@
             }
         },
         "enemies": {
-            "zombie1": {
+            "bee1": {
                 "absolutepositionx": 0,
                 "absolutepositiony": 500,
-                "dimensionx": 30,
-                "dimensiony": 30,
-                "sprite": "spriteurl",
-                "color": "green",
-                "collide": true,
-                "behavior": "follow",
-                "speed": 6
+                "enemytype": "bee"
+            },
+            "zombie1": {
+                "absolutepositionx": 500,
+                "absolutepositiony": 500,
+                "enemytype": "zombie"
             }
         }
     },

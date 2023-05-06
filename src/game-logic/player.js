@@ -1,6 +1,6 @@
 console.log("player.js started loading");
 import PlayerSeed from './player.json';
-import Entity from './entity.js';
+import Entity from './entities/entity.js';
 
 export default class Player extends Entity {
     constructor(name = "John", color = "pink") {
