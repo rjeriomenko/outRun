@@ -83,7 +83,7 @@ export default class Game {
     applyDeath() {
         for (const entity in this.map.entities) {
             let ent = this.map.entities[entity];
-            if (ent.health && Number(ent.health) < 0) {
+            if (typeof ent.health === "number" && ent.health <= 0) {
                 this.frameQueue.push(() => { ent.onDeath() });
             };
         };

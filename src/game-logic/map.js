@@ -9,8 +9,19 @@ export default class Map {
         this.addSeededEntities()
     };
 
+    findHighestId() {
+        let highestId = 1;
+        for (const entityId in this.entities) {
+            if (entityId !== "player" && Number(entityId) >= highestId) {
+                highestId = Number(entityId) + 1;
+            };
+        };
+        return highestId;
+    };
+
     addPlayer(player) {
         this.entities.player = player;
+        player.id = "player"
     };
 
     addSeededEntities() {
@@ -22,13 +33,8 @@ export default class Map {
     };
 
     addEntity(entity) {
-        let highestId = 1;
-        for(const entityId in this.entities) {
-            if(entityId !== "player" && Number(entityId) >= highestId) {
-                highestId = Number(entityId) + 1;
+        let highestId = this.findHighestId()
 
-            };
-        };
         this.entities[highestId] = entity;
         entity.id = highestId;
         entity.map = this;
