@@ -10,25 +10,27 @@ export default class Zombie extends Enemy {
         this.sprite = "spriteurl";
         this.health = 6;
         this.experience = 2;
+        this.touchDamage = 3;
+
     }
 
-    directionToPlayer() {  //finds target X and Y (assuming the max either can be is 1)
+    directionToPlayer() {  // finds target X and Y (assuming the max either can be is 1)
         let playerPosition = this.findEntityCenterCoords(this.map.entities.player)
-        let deltaX = playerPosition[0] - this.absolutePosition[0]
-        let deltaY = playerPosition[1] - this.absolutePosition[1]
+        let deltaX = playerPosition[0] - this.absolutePosition[0];
+        let deltaY = playerPosition[1] - this.absolutePosition[1];
 
         if(Math.abs(deltaX) > 1 || Math.abs(deltaY) > 1) {
-            let biggerSide
+            let biggerSide;
             if(Math.abs(deltaX) > Math.abs(deltaY)) {
-                biggerSide = Math.abs(deltaX)
+                biggerSide = Math.abs(deltaX);
             } else {
-                biggerSide = Math.abs(deltaY)
+                biggerSide = Math.abs(deltaY);
             }
-            deltaX /= biggerSide
-            deltaY /= biggerSide
+            deltaX /= biggerSide;
+            deltaY /= biggerSide;
         }
 
-        return [deltaX, deltaY]
+        return [deltaX, deltaY];
     }
 }
 console.log("zombie.js finished loading");

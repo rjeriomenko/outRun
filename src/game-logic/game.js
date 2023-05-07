@@ -32,7 +32,7 @@ export default class Game {
     };
 
     update() {
-        this.logicStep(); //update camera, all positions, statuses, apply physics, etc
+        this.logicStep(); // update camera, all positions, statuses, apply physics, etc
         this.drawFrame(this.ctx, this.canvas, this.map); // draw everything on the map
         console.log("frame passed");
     };
@@ -62,7 +62,7 @@ export default class Game {
         };
     }
 
-    applyProjectileDamage() { //Iterates through player and enemy projectiles. All close range attacks are also projectiles
+    applyProjectileDamage() { // iterates through player and enemy projectiles. All close range attacks are also projectiles
         for (const entity in this.map.entities) {
             let ent = this.map.entities[entity];
             if (ent.projectileType) {
@@ -71,13 +71,13 @@ export default class Game {
         };
     };
 
-    applyEnemyCollisionDamage() {
-        // for (const entity in this.map.entities) {   ///DO I NEED THIS???
-        //     let ent = this.map.entities[entity];
-        //     if (ent.projectileType) {
-        //         this.frameQueue.push(() => { ent.move() });
-        //     };
-        // };
+    applyEnemyCollision() {
+        for (const entity in this.map.entities) {
+            let ent = this.map.entities[entity];
+            if (ent.enemyType) {
+                this.frameQueue.push(() => { ent.playerCollision() });
+            };
+        };
     };
 
     applyDeath() {
@@ -91,7 +91,7 @@ export default class Game {
 
     inflictDamage() {
         this.applyProjectileDamage();
-        this.applyEnemyCollisionDamage();
+        this.applyEnemyCollision();
         this.applyDeath();
     };
 

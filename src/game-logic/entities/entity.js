@@ -56,7 +56,7 @@ export default class Entity {
 
         if (this.collide) {
             while (this.anyColliding(targetPosition)) {
-                const buffer = 1 // Smallest space possible between two colliding objects
+                const buffer = 1 // smallest space possible between two colliding objects
                 let deltaX = targetPosition[0] - this.absolutePosition[0];
                 let deltaY = targetPosition[1] - this.absolutePosition[1];
                 if (Math.abs(deltaX) < buffer && Math.abs(deltaY) < buffer) {
@@ -107,7 +107,7 @@ export default class Entity {
     closestEnemy() {
         let entities = this.map.entities;
         let shortestDistance = 0;
-        let enemy = this; //If no enemies exist, return self
+        let enemy = this; // if no enemies exist, return self
 
         for(const entity in entities) {
             let ent = entities[entity];
@@ -133,7 +133,7 @@ export default class Entity {
     }
 
     rewardExperience() {
-        this.map.entities.player.gainExperience(this.experience)
+        this.map.entities.player.gainExperience(this.experience);
     }
 
     onDeath() {

@@ -11,10 +11,18 @@ export default class Player extends Entity {
         this.abilities = { 
             ability: this.newAbility(ability)
         };
-        this.health = 1;
+        this.health = 300;
         this.experience = 0;
         this.level = 1;
         this.experienceToLevelUp = 10;
+    };
+
+    damagePlayerHealth(damage) {
+        this.health -= damage;
+    };
+
+    onDeath() {
+        debugger
     };
 
     newAbility(ability) {

@@ -10,14 +10,15 @@ export default class Bee extends Enemy {
         this.sprite = "spriteurl";
         this.health = 3;
         this.experience = 1;
+        this.touchDamage = 1;
     }
 
-    directionToPlayer() {  //finds target X and Y (assuming the min either can be is 1)
-        let playerPosition = this.findEntityCenterCoords(this.map.entities.player)
-        let deltaX = playerPosition[0] - this.absolutePosition[0]
-        let deltaY = playerPosition[1] - this.absolutePosition[1]
+    directionToPlayer() {  // finds target X and Y (assuming the min either can be is 1)
+        let playerPosition = this.findEntityCenterCoords(this.map.entities.player);
+        let deltaX = playerPosition[0] - this.absolutePosition[0];
+        let deltaY = playerPosition[1] - this.absolutePosition[1];
 
-        return [1 * Math.sign(deltaX), 1 * Math.sign(deltaY)]
+        return [1 * Math.sign(deltaX), 1 * Math.sign(deltaY)];
     }
 
 }
