@@ -68,27 +68,22 @@ export default class EntitySpawner {
         return Math.random() * (largerCoord - smallerCoord) + smallerCoord;
     };
 
-    coordsInView(enemy, coords) {
+    coordsInView(enemy) {
+        //coords in view logic
         return false;
     }
 
+    hasViableSpawnCoords(enemy) {
+        if (!enemy.map) { this.map.addEntity(enemy) };
 
-
-    viableSpawnCoords(enemy, coords) {
-        enemy.absolutePosition = coords;
+        if (this.coordsInView(enemy)) { return false };
         
-        if (this.coordsInView(enemy, coords)) {
-            return false;
-        }
-        
-        // if (enemy.anyColliding(coords)) { // unhappy with anycolliding
-        //     return false;
-        // };
+        if (enemy.anyColliding(enemy.absolutePosition)) { return false };
 
         return true;
     }
 
-    findSpawnCoordsForEnemy(enemy) {
+    findSpawnCoords(enemy) {
         let boundPositionX = this.boundBox.absolutePosition[0]
         let boundPositionY = this.boundBox.absolutePosition[1]
         let boundDimensionX = this.boundBox.dimension[0]
@@ -100,11 +95,7 @@ export default class EntitySpawner {
         let spawnX = this.pickSameAxisCoordBetween(boundPositionX, boundXLimit)
         let spawnY = this.pickSameAxisCoordBetween(boundPositionY, boundYLimit)
 
-        if (this.viableSpawnCoords(enemy, [spawnX, spawnY])) {
-            // enemy.absolutePosition = [spawnX, spawnY]
-        }
-
-        enemy.absolutePosition = [-475, -475]  //testing no-collision spawn
+        enemy.absolutePosition = [spawnX, spawnY]
     }
 
     spawnEnemies() {
@@ -116,8 +107,10 @@ export default class EntitySpawner {
                 let enemyType = readySpawnPool[randomIndex]
                 let enemyInstance = this.makePositionlessEnemy(enemyType)
 
-                this.findSpawnCoordsForEnemy(enemyInstance);
-                this.map.addEntity(enemyInstance);
+                this.findSpawnCoords(enemyInstance);
+                while(!this.hasViableSpawnCoords(enemyInstance)) {
+                    this.findSpawnCoords(enemyInstance);
+                }
             };
         };
     };
