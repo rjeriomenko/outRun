@@ -8,6 +8,8 @@ export default class Zombie extends Enemy {
         this.color = "green";
         this.speed = 2.5;
         this.sprite = "spriteurl";
+        this.health = 6;
+        this.experience = 2;
     }
 
     directionToPlayer() {  //finds target X and Y (assuming the max either can be is 1)

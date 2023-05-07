@@ -11,6 +11,9 @@ export default class Player extends Entity {
         this.abilities = { 
             ability: this.newAbility(ability)
         };
+        this.experience = 0;
+        this.level = 1;
+        this.experienceToLevelUp = 10;
     };
 
     newAbility(ability) {
@@ -19,5 +22,18 @@ export default class Player extends Entity {
                 return new Missile(this);
         }
     }
+
+    gainExperience(experience) {
+        this.experience = this.experience + experience;
+        if(this.experience > this.experienceToLevelUp) {
+            this.experience -= this.experienceToLevelUp;
+            this.levelUp();
+        };
+    };
+
+    levelUp() {
+        this.level += 1;
+        this.experienceToLevelUp *= 2;      
+    };
 }
 console.log("player.js finished loading");

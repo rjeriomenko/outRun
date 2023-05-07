@@ -60,13 +60,46 @@ export default class Game {
                 this.frameQueue.push(() => { ent.move() });
             };
         };
-
     }
+
+    applyProjectileDamage() { //Iterates through player and enemy projectiles. All close range attacks are also projectiles
+        for (const entity in this.map.entities) {
+            let ent = this.map.entities[entity];
+            if (ent.projectileType) {
+                this.frameQueue.push(() => { ent.doDamage() });
+            };
+        };
+    };
+
+    applyEnemyCollisionDamage() {
+        // for (const entity in this.map.entities) {   ///DO I NEED THIS???
+        //     let ent = this.map.entities[entity];
+        //     if (ent.projectileType) {
+        //         this.frameQueue.push(() => { ent.move() });
+        //     };
+        // };
+    };
+
+    applyDeath() {
+        for (const entity in this.map.entities) {
+            let ent = this.map.entities[entity];
+            if (ent.health && Number(ent.health) < 0) {
+                this.frameQueue.push(() => { ent.onDeath() });
+            };
+        };
+    };
+
+    inflictDamage() {
+        this.applyProjectileDamage();
+        this.applyEnemyCollisionDamage();
+        this.applyDeath();
+    };
 
     logicStep() {
         this.activateAbilities();
         this.moveEnemies();
         this.moveProjectiles();
+        this.inflictDamage();
         this.frameQueue.frameQueueExecute();
         this.camera.followEntity(); // update camera to new follow coordinates
     };

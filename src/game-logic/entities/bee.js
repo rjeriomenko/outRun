@@ -8,6 +8,8 @@ export default class Bee extends Enemy {
         this.color = "yellow";
         this.speed = 4;
         this.sprite = "spriteurl";
+        this.health = 3;
+        this.experience = 1;
     }
 
     directionToPlayer() {  //finds target X and Y (assuming the min either can be is 1)
@@ -17,5 +19,6 @@ export default class Bee extends Enemy {
 
         return [1 * Math.sign(deltaX), 1 * Math.sign(deltaY)]
     }
+
 }
 console.log("bee.js finished loading");

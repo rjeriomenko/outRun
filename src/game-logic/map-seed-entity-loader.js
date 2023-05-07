@@ -17,6 +17,7 @@ export default class mapSeedEntityLoader {
         for(const objectName in seedEntities.objects) {
             let object = new Entity(objectName, seedEntities.objects[objectName]);
             entitiesObject[id] = object;
+            object.id = id;
             id++;
         }
 
@@ -33,6 +34,7 @@ export default class mapSeedEntityLoader {
                     break;
             }
             entitiesObject[id] = enemyInstance;
+            enemyInstance.id = id;
             id++;
         }
 

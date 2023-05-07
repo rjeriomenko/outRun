@@ -13,7 +13,7 @@ export default class MissileProjectile extends Projectile {
         this.projectileType = "missile";
     }
 
-    directionToEnemy() {  //finds target X and Y (assuming the max either can be is 1)
+    directionToTarget() {  //finds target X and Y (assuming the max either can be is 1)
         let closestEnemy = this.closestEnemy();
         let targetPosition = this.findEntityCenterCoords(closestEnemy);
         let deltaX = targetPosition[0] - this.absolutePosition[0];
@@ -33,5 +33,24 @@ export default class MissileProjectile extends Projectile {
         return [deltaX, deltaY];
     }
 
+    collidingEnemy() {
+        let currentPosition = this.absolutePosition;
+
+        for (const entity in this.map.entities) {
+            let ent = this.map.entities[entity];
+            if (ent.enemyType && this.collidingWithEntityAtCoord(ent, currentPosition)) {
+                return ent;
+            };
+        };
+    };
+
+    doDamage() {
+        let targetEnemy = this.collidingEnemy();
+        
+        if (targetEnemy) {
+            targetEnemy.health -= this.damage;
+            this.onDeath();
+        };
+    };
 }
 console.log("missle-projectile.js finished loading");

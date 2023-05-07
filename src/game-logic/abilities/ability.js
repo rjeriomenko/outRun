@@ -1,9 +1,9 @@
 console.log("ability.js started loading");
 export default class Ability {
-    constructor(player, duration = -1) {
-        this.player = player;
+    constructor(entity, duration = -1) {
+        this.entity = entity;
         this.duration = duration;
-        this.map = this.player.map;
+        this.map = this.entity.map;
     }
 }
 console.log("ability.js finished loading");

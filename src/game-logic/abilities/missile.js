@@ -14,7 +14,7 @@ export default class Missile extends Ability {
 
     activate() {
         if(this.coolDownReady()) {
-            let fireCoords = this.player.findEntityCenterCoords(this.player);
+            let fireCoords = this.entity.findEntityCenterCoords(this.entity);
             this.firedCount++;
             let MissileProperties = {
                 "damage": this.damage,

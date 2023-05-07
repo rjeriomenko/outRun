@@ -106,14 +106,12 @@ export default class Entity {
 
     closestEnemy() {
         let entities = this.map.entities;
-        // let enemyExist = false;
         let shortestDistance = 0;
         let enemy = this; //If no enemies exist, return self
 
         for(const entity in entities) {
             let ent = entities[entity];
             if(ent.enemyType) {
-                // enemyExist = true;
                 let distance = this.distanceToEnemy(ent);
                 if(distance < shortestDistance || !shortestDistance) {
                     shortestDistance = distance;
@@ -133,5 +131,16 @@ export default class Entity {
 
         return Math.sqrt(deltaX ** 2 + deltaY ** 2);
     }
+
+    rewardExperience() {
+        this.map.entities.player.gainExperience(this.experience)
+    }
+
+    onDeath() {
+        let id = this.id;
+
+        if(this.enemyType) { this.rewardExperience() };
+        delete this.map.entities[id];
+    };
 }
 console.log("entity.js finished loading");
