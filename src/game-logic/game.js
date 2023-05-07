@@ -37,6 +37,11 @@ export default class Game {
         console.log("frame passed");
     };
 
+    spawnEnemies() {
+        this.map.entitySpawner.spawnEnemies();
+    }
+
+
     activateAbilities() {
         for(const ability in this.player.abilities) {
             let abt = this.player.abilities[ability]
@@ -96,6 +101,7 @@ export default class Game {
     };
 
     logicStep() {
+        this.spawnEnemies();
         this.activateAbilities();
         this.moveEnemies();
         this.moveProjectiles();

@@ -2,7 +2,7 @@
 //When an entity is destroyed, it will be removed from the current map
 console.log("entity.js started loading");
 export default class Entity {
-    constructor(entityName, entityProperties) {
+    constructor(entityName, entityProperties = {}) {
         this.name = entityName;
         this.absolutePosition = this.parseXY(entityProperties);
         this.dimension = this.parseXY(entityProperties, "dim");
@@ -116,12 +116,12 @@ export default class Entity {
                 if(distance < shortestDistance || !shortestDistance) {
                     shortestDistance = distance;
                     enemy = ent;
-                }
-            }
-        }
+                };
+            };
+        };
 
         return enemy;
-    }
+    };
 
     distanceToEnemy(enemy) {
         let position = this.absolutePosition;

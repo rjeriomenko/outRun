@@ -7,7 +7,7 @@ export default class Missile extends Ability {
         super(player);
         this.damage = 5;
         this.projectileSpeed = 5;
-        this.coolDown = 60;
+        this.coolDownTimer = 60;
         this.coolDownCounter = 0;
         this.firedCount = 0;
     }
@@ -28,7 +28,7 @@ export default class Missile extends Ability {
 
     coolDownReady() {
         if (this.coolDownCounter === 0) {
-            this.coolDownCounter = this.coolDown;
+            this.coolDownCounter = this.coolDownTimer;
             return true;
         } else {
             this.coolDownCounter--;

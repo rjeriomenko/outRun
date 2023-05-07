@@ -45,7 +45,7 @@ export default class Render {
                 this.ctx.fillRect(posX, posY, dimX, dimY);
             };
 
-            this.ctx.fillStyle = entityProperties.color; //Making sure the player renders last
+            this.ctx.fillStyle = entityProperties.color; // makes sure the player renders last
             this.ctx.fillRect(posX, posY, dimX, dimY);
         }
     }

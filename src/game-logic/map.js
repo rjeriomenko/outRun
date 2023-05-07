@@ -1,12 +1,15 @@
 //This will populate a map with a seed
 console.log("map.js started loading");
 import mapSeedEntityLoader from './map-seed-entity-loader.js';
+import EntitySpawner from './entity-spawner.js';
 
 export default class Map {
     constructor (seed) {
         this.background = seed.background;
+        this.difficulty = 1;
         this.seededEntities = new mapSeedEntityLoader(seed.entities); // allows player to reset map with seeded entities at any time
-        this.addSeededEntities()
+        this.addSeededEntities();
+        this.entitySpawner = new EntitySpawner(this);
     };
 
     findHighestId() {

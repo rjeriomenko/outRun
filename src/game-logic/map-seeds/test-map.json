@@ -1,6 +1,14 @@
 {
     "entities": {
         "objects": {
+            "bound-box": {
+                "absolutepositionx": -450,
+                "absolutepositiony": -450,
+                "dimensionx": 1500,
+                "dimensiony": 1400,
+                "sprite": "spriteurl",
+                "color": "white"
+            },
             "vertical-midline": {
                 "absolutepositionx": 250,
                 "absolutepositiony": 0,
@@ -97,12 +105,12 @@
             }
         },
         "enemies": {
-            "bee1": {
+            "bee0": {
                 "absolutepositionx": 0,
                 "absolutepositiony": 500,
                 "enemytype": "bee"
             },
-            "zombie1": {
+            "zombie0": {
                 "absolutepositionx": 500,
                 "absolutepositiony": 500,
                 "enemytype": "zombie"
