@@ -17,6 +17,10 @@ export default class EntitySpawner {
         this.zombieCount = 0;
     }
 
+    addCamera(camera) {
+        this.camera = camera;
+    }
+
     prepareSpawnPool() {
         let readySpawnPool = []
 
@@ -69,8 +73,7 @@ export default class EntitySpawner {
     };
 
     coordsInView(enemy) {
-        //coords in view logic
-        return false;
+        return this.camera.entityInView(enemy);
     }
 
     hasViableSpawnCoords(enemy) {
@@ -78,7 +81,7 @@ export default class EntitySpawner {
 
         if (this.coordsInView(enemy)) { return false };
         
-        if (enemy.anyColliding(enemy.absolutePosition)) { return false };
+        if (enemy.collide && enemy.anyColliding(enemy.absolutePosition)) { return false };
 
         return true;
     }

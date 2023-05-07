@@ -22,9 +22,11 @@ export default class Map {
         return highestId;
     };
 
-    addPlayer(player) {
+    addPlayerAndCamera(player, camera) {
         this.entities.player = player;
-        player.id = "player"
+        player.id = "player";
+        this.camera = camera;
+        this.entitySpawner.addCamera(camera);
     };
 
     addSeededEntities() {

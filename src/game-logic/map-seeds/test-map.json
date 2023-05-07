@@ -102,6 +102,14 @@
                 "sprite": "spriteurl",
                 "color": "gray",
                 "collide": true
+            },
+            "view-box": {
+                "absolutepositionx": -125,
+                "absolutepositiony": -125,
+                "dimensionx": 10,
+                "dimensiony": 10,
+                "sprite": "spriteurl",
+                "color": "purple"
             }
         },
         "enemies": {

@@ -19,8 +19,8 @@ export default class Game {
         this.canvas = canvas;
         this.loadMap(); // load default test map with default player
         this.player = new Player(this.map);
-        this.map.addPlayer(this.player)
-        this.camera = new Camera(ctx, canvas, this.player);
+        this.camera = new Camera(ctx, canvas, this.map, this.player);
+        this.map.addPlayerAndCamera(this.player, this.camera);
         this.frameQueue = new FrameQueue
         this.frameTimer = setInterval(() => { this.update() }, (1000/60)); // update every frame at 60 frames per second -- Can be replaced with window.requestAnimationFrame()
         window.addEventListener('keydown', (e) => { this.moveKey(e) }, false) // make repeat player movement browser-agnostic

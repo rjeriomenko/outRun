@@ -15,6 +15,7 @@ export default class MissileProjectile extends Projectile {
 
     directionToTarget() {  //finds target X and Y (assuming the max either can be is 1)
         let closestEnemy = this.closestEnemy();
+        if (closestEnemy === this) { return [0,0] };
         let targetPosition = this.findEntityCenterCoords(closestEnemy);
         let deltaX = targetPosition[0] - this.absolutePosition[0];
         let deltaY = targetPosition[1] - this.absolutePosition[1];
