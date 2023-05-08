@@ -7,3 +7,27 @@ body {
 #view {
     border: solid 1px black;
 }
+
+.main-menu {
+    position: absolute;
+    background-color: white;
+    width: 600px;
+    height: 600px;
+    margin-top: 76px;
+    flex-direction: column;
+    visibility: hidden;
+}
+
+.pause-menu {
+    position: absolute;
+    background-color: white;
+    width: 600px;
+    height: 600px;
+    margin-top: 76px;
+    flex-direction: column;
+    visibility: hidden;
+}
+
+li {
+    margin: 80px 0px;
+}

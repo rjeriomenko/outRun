@@ -22,7 +22,6 @@ export default class EventHandler {
             case "enter":
                 //Enter logic
                 break;
-
         };
     };
 
@@ -48,10 +47,21 @@ export default class EventHandler {
     checkEvent(event) {
         return this.events.includes(event);
     }
+
+    showNode(node) {
+        let Node = document.querySelector(node);
+        Node.style.visibility = "visible"
+    }
+
+    hideNode(node) {
+        let Node = document.querySelector(node);
+        Node.style.visibility = "hidden"
+    }
     
     test() { //LIKELY TO CHANGE TO LOAD MAP EVENT
         this.clearEvents()
         this.game.loadMap("John", "orange", "missile", "test", "default");
+        this.hideNode(".main-menu");
     }
     
     mainMenu() {
@@ -59,6 +69,7 @@ export default class EventHandler {
         this.game.loadMap("menuplayer", "pink", "mainmenuability");
         this.game.camera.followNewEntity(this.game.map.entities[1]);
         this.addEvent("mainmenu");
+        this.showNode(".main-menu")
     };
 
     restoreFrameQueueAndFrameTimer() {
@@ -77,11 +88,13 @@ export default class EventHandler {
         if (this.checkEvent("pause")) {
             this.restoreFrameQueueAndFrameTimer();
             this.clearEvent("pause");
+            this.hideNode(".pause-menu");
 
         } else if (this.emptyEvents()) {
             this.storeFrameQueueAndFrameTimer();
             this.game.newPauseFrameTimer(); // allows for setInterval to resume without updating the game
             this.addEvent("pause");
+            this.showNode(".pause-menu");
         }
     }
 
