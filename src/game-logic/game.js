@@ -7,32 +7,32 @@
 console.log("game.js started loading");
 import Map from './map.js';
 import Render from './render.js';
-import TestSeed from './map-seeds/test-map.json';
 import Camera from './camera.js';
 import Player from './entities/player.js';
 import FrameQueue from './frame-queue.js';
-import KeyboardWords from './keyboard-words.json'; //Should consider adding a keyboard class
+import EventHandler from './event-handler.js';
 
 export default class Game {
     constructor(ctx, canvas) {
         this.ctx = ctx;
         this.canvas = canvas;
-        this.loadMap(); // load default test map with default player
-        this.player = new Player(this.map);
-        this.camera = new Camera(ctx, canvas, this.map, this.player);
-        this.map.addPlayerAndCamera(this.player, this.camera);
-        this.frameQueue = new FrameQueue
+        this.eventHandler = new EventHandler(this); // create evenHandler, which will load main menu map with main menu "player"
+        this.frameQueue = new FrameQueue;
         this.frameTimer = setInterval(() => { this.update() }, (1000/60)); // update every frame at 60 frames per second -- Can be replaced with window.requestAnimationFrame()
-        window.addEventListener('keydown', (e) => { this.moveKey(e) }, false) // make repeat player movement browser-agnostic
-        window.addEventListener('keyup', (e) => { this.removeKey(e) }, false)
+        window.addEventListener('keydown', (e) => { this.eventHandler.moveKey(e) }, false) // make repeat player movement browser-agnostic
+        window.addEventListener('keyup', (e) => { this.eventHandler.removeKey(e) }, false)
     };
 
-    loadMap(seed = TestSeed) {
+    loadMap(playerName, playerColor, playerAbility, seed = "mainmenu", player = "mainmenu") {
+        if (this.frameQueue) { this.frameQueue.clearQueue() }
         this.map = new Map(seed);
+        this.player = new Player(this.map, player, playerName, playerColor, playerAbility);
+        this.camera = new Camera(this.ctx, this.canvas, this.map, this.player);
+        this.map.addPlayerAndCamera(this.player, this.camera);
     };
 
     update() {
-        this.logicStep(); // update camera, all positions, statuses, apply physics, etc
+        this.logicStep(); // update camera, all positions, statuses, etc
         this.drawFrame(this.ctx, this.canvas, this.map); // draw everything on the map
         console.log("frame passed");
     };
@@ -40,7 +40,6 @@ export default class Game {
     spawnEnemies() {
         this.map.entitySpawner.spawnEnemies();
     }
-
 
     activateAbilities() {
         for(const ability in this.player.abilities) {
@@ -112,47 +111,6 @@ export default class Game {
 
     drawFrame(ctx, canvas, map) {
         new Render(ctx, canvas, map);
-    };
-
-    moveKey(e) {
-        let k = e.key;
-        switch (k) {
-            case "ArrowUp":
-            case "w":
-                if(!e.repeat) {
-                this.frameQueue.everyQueuePush(`${KeyboardWords[k]}`, () => {this.player.move([0, -1])});
-                }
-                break;
-            case "ArrowRight":
-            case "d":
-                if (!e.repeat) {
-                    this.frameQueue.everyQueuePush(`${KeyboardWords[k]}`, () => { this.player.move([1, 0]) });
-                }
-                break;
-            case "ArrowDown":
-            case "s":
-                if (!e.repeat) {
-                    this.frameQueue.everyQueuePush(`${KeyboardWords[k]}`, () => { this.player.move([0, 1]) });
-                }
-                break;
-            case "ArrowLeft":
-            case "a":
-                if (!e.repeat) {
-                    this.frameQueue.everyQueuePush(`${KeyboardWords[k]}`, () => { this.player.move([-1, 0]) });
-                }
-                break;
-            case "Escape":    
-            case "p":
-                if (!e.repeat) {
-                    this.frameQueue.push(() => { console.log("pause") }); //Replace with pause functionality
-                }
-                break;
-        }
-    }
-
-    removeKey(e) {
-        let k = e.key;
-        this.frameQueue.everyQueueDel(`${KeyboardWords[k]}`);
     };
 }
 

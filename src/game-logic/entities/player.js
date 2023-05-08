@@ -1,21 +1,35 @@
+//This will import different player seeds and use one to create a player
 console.log("player.js started loading");
-import PlayerSeed from '../player.json';
+import DefaultPlayerSeed from '../default-player.json';
+import MainMenuPlayerSeed from '../main-menu-player.json';
 import Entity from './entity.js';
 import Missile from '../abilities/missile.js';
+import MainMenuAbility from '../abilities/main-menu-ability.js';
+
 
 export default class Player extends Entity {
-    constructor(map, name = "John", color = "pink", ability = "missile") {
-        super(name, PlayerSeed);
+    constructor(map, seed, name = "John", color = "pink", ability = "missile") {
+        super(name, Player.pickSeed(seed));
+        this.seed = Player.pickSeed(seed);
         this.map = map;
-        this.color = color;
+        this.color = this.seed.color || color || "pink";
         this.abilities = { 
             ability: this.newAbility(ability)
         };
-        this.health = 300;
+        this.health = this.seed.health || 300;
         this.experience = 0;
         this.level = 1;
-        this.experienceToLevelUp = 10;
+        this.experienceToLevelUp = this.seed.experiencetolevelup || 10;
     };
+
+    static pickSeed(seed) {
+        switch (seed) {
+            case "default":
+                return DefaultPlayerSeed;
+            case "mainmenu":
+                return MainMenuPlayerSeed;
+        }
+    }
 
     damagePlayerHealth(damage) {
         this.health -= damage;
@@ -29,6 +43,8 @@ export default class Player extends Entity {
         switch(ability) {
             case "missile":
                 return new Missile(this);
+            case "mainmenuability":
+                return new MainMenuAbility(this);
         }
     }
 

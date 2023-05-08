@@ -1,0 +1,11 @@
+{
+    "absolutepositionx": 230,
+    "absolutepositiony": 230,
+    "dimensionx": 0,
+    "dimensiony": 0,
+    "sprite": "spriteurl",
+    "speed": 8,
+    "collide": false,
+    "health": "Infinity",
+    "experiencetolevelup": "Infinity"
+}

@@ -2,10 +2,13 @@ console.log("frame-queue.js started loading");
 
 export default class FrameQueue {
     constructor() {
+        this.clearQueue()
+    };
+
+    clearQueue() {
         this.queue = [];
         this.everyQueue = {};
-        
-    };
+    }
 
     push(func) {
         this.queue.push(func)

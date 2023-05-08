@@ -55,27 +55,6 @@ export default class Camera {
         this.following = entity;
     }
 
-    // collidingWithEntityAtCoord(targetEntity, targetPosition) {
-    //     let pos1 = targetPosition;
-    //     let pos2 = targetEntity.absolutePosition;
-    //     let dim1 = this.dimension;
-    //     let dim2 = targetEntity.dimension;
-
-    //     return this.overlapX(pos1, pos2, dim1, dim2) && this.overlapY(pos1, pos2, dim1, dim2);
-    // };
-
-    // overlapX(pos1, pos2, dim1, dim2) {
-    //     if (pos1[0] + dim1[0] > pos2[0] && pos2[0] + dim2[0] > pos1[0]) {
-    //         return true;
-    //     };
-    // };
-
-    // overlapY(pos1, pos2, dim1, dim2) {
-    //     if (pos1[1] + dim1[1] > pos2[1] && pos2[1] + dim2[1] > pos1[1]) {
-    //         return true;
-    //     };
-    // };
-
     overlapViewEntityXAxis(viewCoords, entity) {
         let viewXStart = viewCoords[0];
         let viewXLimit = viewCoords[0] + this.canvas.width;
