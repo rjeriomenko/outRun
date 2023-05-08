@@ -8,5 +8,7 @@
     "ArrowLeft": "left",
     "a": "left",
     "Escape": "escape",
-    "p": "escape"
+    "p": "escape",
+    "Enter": "enter",
+    " ": "enter"
 }

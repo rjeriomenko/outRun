@@ -1,5 +1,4 @@
-//This will handle all game logic, including updating and rendering the map between every frame
-//This will import .json map-seeds and create new Map instances from them
+//This will handle all frame game logic, including updating and rendering the map between every frame
 //This will update the map as more entities are created or destroyed
 //This will allow the user to change maps
 //When an entity is created, it will be given an absolute pos and (optionally) be given a subclass with subclass properties and added to the current map
@@ -30,6 +29,20 @@ export default class Game {
         this.camera = new Camera(this.ctx, this.canvas, this.map, this.player);
         this.map.addPlayerAndCamera(this.player, this.camera);
     };
+
+    newPauseFrameTimer() {
+        this.frameTimer = setInterval(() => { this.pauseUpdate() }, (1000 / 60));
+    }
+
+    pauseUpdate() {
+        this.frameQueue.frameQueueExecute();
+        this.drawFrame(this.ctx, this.canvas, this.map);
+    }
+
+    restoreFrameQueueAndFrameTimer(restoreQueue) {
+        this.frameQueue = new FrameQueue(restoreQueue);
+        this.frameTimer = setInterval(() => { this.update() }, (1000 / 60));
+    }
 
     update() {
         this.logicStep(); // update camera, all positions, statuses, etc

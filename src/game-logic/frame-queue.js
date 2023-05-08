@@ -1,13 +1,21 @@
 console.log("frame-queue.js started loading");
 
 export default class FrameQueue {
-    constructor() {
+    constructor(restoreQueue) {
         this.clearQueue()
+        this.restoreQueue(restoreQueue)
     };
 
     clearQueue() {
         this.queue = [];
         this.everyQueue = {};
+    }
+
+    restoreQueue(restoreQueue) {
+        if (restoreQueue) {
+            this.queue = restoreQueue[0]
+            this.Everyqueue = restoreQueue[1]
+        }
     }
 
     push(func) {
