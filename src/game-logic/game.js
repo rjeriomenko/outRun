@@ -141,6 +141,12 @@ export default class Game {
                     this.frameQueue.everyQueuePush(`${KeyboardWords[k]}`, () => { this.player.move([-1, 0]) });
                 }
                 break;
+            case "Escape":    
+            case "p":
+                if (!e.repeat) {
+                    this.frameQueue.push(() => { console.log("pause") }); //Replace with pause functionality
+                }
+                break;
         }
     }
 

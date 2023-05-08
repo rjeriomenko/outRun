@@ -6,5 +6,7 @@
     "ArrowDown": "down",
     "s": "down",
     "ArrowLeft": "left",
-    "a": "left"
+    "a": "left",
+    "Escape": "escape",
+    "p": "escape"
 }
