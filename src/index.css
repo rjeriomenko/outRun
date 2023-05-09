@@ -20,10 +20,6 @@ li {
     padding: 20px;
 }
 
-li:not(:first-child):hover {
-    outline: solid 5px white;
-}
-
 .main-menu {
     position: fixed;
     background-color: clear;
@@ -64,4 +60,12 @@ li:not(:first-child):hover {
 
 .pause-list > li {
     background: black;
+}
+
+li:first-of-type {
+    color: orange
+}
+
+li[data-selected="true"]{
+    outline: solid 5px white;
 }

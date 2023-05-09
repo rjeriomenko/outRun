@@ -20,7 +20,7 @@ export default class EventHandler {
                 this.loadMap("test");
                 break;
             case "enter":
-                //Enter logic
+                this.enter();
                 break;
             case "instructions":
                 //Instructions logic
@@ -38,14 +38,34 @@ export default class EventHandler {
         this.addPauseMenuListeners();
     }
 
+    clearListSelected() {
+        let listElements = document.querySelectorAll('li')
+        for (let i = 0; i < listElements.length; i++) {
+            let list = listElements[i];
+            list.dataset.selected = false;
+        }
+    }
+
+    mouseOverSelected(event) {
+        let target = event.target
+        if(target.dataset.trigger) {
+            this.clearListSelected();
+            target.dataset.selected = true;
+        }
+    }
+
     addMainMenuListeners() {
         let mainMenu = document.querySelector("#main-menu-list");
         mainMenu.addEventListener('click', (e) => { this.triggerEvent(e.target.dataset.trigger) });
+        mainMenu.addEventListener('mouseover', (e) => { this.mouseOverSelected(e) });
+        mainMenu.addEventListener('mouseout', () => { this.clearListSelected() });
     }
 
     addPauseMenuListeners() {
         let pauseMenu = document.querySelector("#pause-menu-list");
         pauseMenu.addEventListener('click', (e) => { this.triggerEvent(e.target.dataset.trigger) });
+        pauseMenu.addEventListener('mouseover', (e) => { this.mouseOverSelected(e) });
+        pauseMenu.addEventListener('mouseout', () => { this.clearListSelected() });
     }
 
     addEvent(event) {
@@ -92,7 +112,7 @@ export default class EventHandler {
 
     }
     
-    loadMap(map = "test") { //LIKELY TO CHANGE TO LOAD MAP EVENT
+    loadMap(map = "test") {
         if (this.checkEvent("pause")) {
             this.pause()
         }
@@ -102,13 +122,20 @@ export default class EventHandler {
         this.hideNode(".pause-menu");
         this.showViewBorder();
     }
+
+    applyChildSelected(selector) {
+        let parent = document.querySelector(selector);
+        let child = parent.children[1];
+        child.dataset.selected = true;
+        return child;
+    }
     
     mainMenu() {
-        // this.game.frameQueue.clearQueue()
         if (this.checkEvent("pause")) {
-            this.pause()
+            this.pause();
         }
         this.clearEvents();
+        this.applyChildSelected("#main-menu-list");
         this.game.loadMap("menuplayer", "pink", "mainmenuability");
         this.game.camera.followNewEntity(this.game.map.entities[1]);
         this.addEvent("mainmenu");
@@ -130,49 +157,113 @@ export default class EventHandler {
     
     pause() { // clears setInterval and pauses the game
         if (this.checkEvent("pause")) {
+            this.clearListSelected();
             this.restoreFrameQueueAndFrameTimer();
             this.clearEvent("pause");
             this.hideNode(".pause-menu");
 
         } else if (this.emptyEvents()) {
             this.storeFrameQueueAndFrameTimer();
+            this.clearListSelected();
+            this.applyChildSelected("#pause-menu-list");
             this.game.newPauseFrameTimer(); // allows for setInterval to resume without updating the game
             this.addEvent("pause");
             this.showNode(".pause-menu");
         }
     }
 
-    move(direction) {
+    enter() {
+        let element = document.querySelector('[data-selected="true"]');
+        if (element) {
+            element.dataset.selected = false;
+            this.triggerEvent(element.dataset.trigger);
+        }
+    };
+    
+    navigateUpList(selectedElement) {
+        selectedElement.dataset.selected = false;
+        let previousElement = selectedElement.previousElementSibling;
+        let firstElement = selectedElement.parentElement.firstElementChild;
+        if (!previousElement || previousElement === firstElement) {
+            previousElement = selectedElement.parentElement.lastElementChild;
+        }
+        previousElement.dataset.selected = true;
+    }
+    
+    navigateDownList(selectedElement) {
+        selectedElement.dataset.selected = false;
+        let nextElement = selectedElement.nextElementSibling;
+        if (!nextElement) {
+            nextElement = selectedElement.parentElement.children[1];
+        }
+        nextElement.dataset.selected = true;
+    }
+    
+    menuKeySelect(keyName, selectedElement) {
+        switch (keyName) {
+            case "up":
+            case "left":
+                this.navigateUpList(selectedElement);
+                break;
+            case "down":
+            case "right":
+                this.navigateDownList(selectedElement);
+                break;
+        }
+    }
+
+    menuKeyPrepareSelect(keyName) {
+        let parentMenuList;
+
+        if (this.checkEvent("mainmenu")) {
+            parentMenuList = document.querySelector("#main-menu-list");
+        } else if (this.checkEvent("pause")) {
+            parentMenuList = document.querySelector("#pause-menu-list");
+        }
+
+        let selectedElement = document.querySelector('[data-selected="true"]');
+        if(!selectedElement) {
+            selectedElement = this.applyChildSelected(`#${parentMenuList.id}`);
+        }
+
+        this.menuKeySelect(keyName, selectedElement);
+    }
+
+    move(direction, keyName) {
         if (this.emptyEvents()) {
             this.game.player.move(direction);
-        };
+        } else {
+            this.menuKeyPrepareSelect(keyName);
+
+        }
     };
 
     moveKey(e) {
         let k = e.key;
+        let keyName = KeyboardWords[k]
         switch (k) {
             case "ArrowUp":
             case "w":
                 if (!e.repeat) {
-                    this.game.frameQueue.everyQueuePush(`${KeyboardWords[k]}`, () => { this.move([0, -1]) });
+                    this.game.frameQueue.everyQueuePush(`${keyName}`, () => { this.move([0, -1], keyName) }); //SCROLLING MIGHT BE TOO FAST
                 }
                 break;
             case "ArrowRight":
             case "d":
                 if (!e.repeat) {
-                    this.game.frameQueue.everyQueuePush(`${KeyboardWords[k]}`, () => { this.move([1, 0]) });
+                    this.game.frameQueue.everyQueuePush(`${keyName}`, () => { this.move([1, 0], keyName) });
                 }
                 break;
             case "ArrowDown":
             case "s":
                 if (!e.repeat) {
-                    this.game.frameQueue.everyQueuePush(`${KeyboardWords[k]}`, () => { this.move([0, 1]) });
+                    this.game.frameQueue.everyQueuePush(`${keyName}`, () => { this.move([0, 1], keyName) });
                 }
                 break;
             case "ArrowLeft":
             case "a":
                 if (!e.repeat) {
-                    this.game.frameQueue.everyQueuePush(`${KeyboardWords[k]}`, () => { this.move([-1, 0]) });
+                    this.game.frameQueue.everyQueuePush(`${keyName}`, () => { this.move([-1, 0], keyName) });
                 }
                 break;
             case "Escape":
@@ -184,7 +275,7 @@ export default class EventHandler {
             case "Enter":
             case " ":
                 if (!e.repeat) {
-                    this.game.frameQueue.push(() => { this.triggerEvent("play") });
+                    this.game.frameQueue.push(() => { this.triggerEvent("enter") });
                 }
                 break;
         }
