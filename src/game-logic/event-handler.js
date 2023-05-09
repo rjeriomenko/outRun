@@ -69,7 +69,7 @@ export default class EventHandler {
         this.game.loadMap("menuplayer", "pink", "mainmenuability");
         this.game.camera.followNewEntity(this.game.map.entities[1]);
         this.addEvent("mainmenu");
-        this.showNode(".main-menu")
+        this.showNode(".main-menu");
     };
 
     restoreFrameQueueAndFrameTimer() {

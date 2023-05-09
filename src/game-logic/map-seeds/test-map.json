@@ -7,7 +7,7 @@
                 "dimensionx": 1500,
                 "dimensiony": 1400,
                 "sprite": "spriteurl",
-                "color": "white"
+                "color": "black"
             },
             "vertical-midline": {
                 "absolutepositionx": 250,
