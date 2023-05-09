@@ -37,7 +37,7 @@ export default class Game {
     }
 
     addMainMenuListeners() {
-        let mainmenu = document.querySelector('.')
+        let mainmenu = document.querySelector('.main-menu')
 
     }
 

@@ -1,9 +1,8 @@
-li {
+ul, li {
     list-style-type: none;
-    margin: none;
-}
-
-ul {
     margin: 0px;
     padding: 0px;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
