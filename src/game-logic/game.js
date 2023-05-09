@@ -122,8 +122,8 @@ export default class Game {
         this.camera.followEntity(); // update camera to new follow coordinates
     };
 
-    drawFrame(ctx, canvas, map) {
-        new Render(ctx, canvas, map);
+    drawFrame() {
+        new Render(this.ctx, this.canvas, this.map, this.camera);
     };
 }
 

@@ -1,9 +1,10 @@
 console.log("render.js started loading");
 export default class Render {
-    constructor(ctx, canvas, map) {
+    constructor(ctx, canvas, map, camera) {
         this.ctx = ctx;
         this.canvas = canvas;
         this.map = map;
+        this.camera = camera
         this.drawMap();
     }
 
@@ -72,9 +73,28 @@ export default class Render {
         this.ctx.stroke();
     };
 
-    drawCRTLines() {  // draw CRT lines
-        console.log("running")
-    } 
+    drawFollowingCRTLines() {  // draw CRT lines
+        this.resetdrawStyle();
+        this.ctx.shadowBlur = 2;
+        const crtLineWidth = 2.5;
+        const crtLineSpacing = 5;
+        let x = this.camera.currentViewCoords()[0];
+        let yMin = this.camera.currentViewCoords()[1];
+        let yMax = yMin + this.canvas.height;
+
+        for (let y = yMin; y <= yMax; y += crtLineSpacing) {
+            this.ctx.fillRect(x, y, this.canvas.width, crtLineWidth);
+        }
+    };
+
+    drawFloatingObject(xOffset, yOffset, xDim, yDim) {   ///xOffset and yOffset will offset along canvas grid
+        this.resetdrawStyle();
+        this.ctx.fillStyle = "white";
+        let xCoords = this.originCoords()[0] + xOffset
+        let yCoords = this.originCoords()[0] + yOffset
+
+        this.ctx.fillRect(xCoords, yCoords, xDim, yDim)
+    } ;
 
 
     drawMap() {
@@ -104,7 +124,9 @@ export default class Render {
         // this.drawClassicStyle(...entityPosAndDim, player);
         // this.drawLineStyle(...entityPosAndDim, player);
 
-        this.drawCRTLines()
+        this.drawFloatingObject(150, 150, 100, 100);
+        this.drawFloatingObject(-250, 75, 100, 100);
+        this.drawFollowingCRTLines()
     };
 
 }
