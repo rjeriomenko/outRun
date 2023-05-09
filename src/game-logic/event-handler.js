@@ -70,15 +70,21 @@ export default class EventHandler {
     }
     
     test() { //LIKELY TO CHANGE TO LOAD MAP EVENT
-        // this.game.frameQueue.clearQueue()
-        this.clearEvents()
+        if (this.checkEvent("pause")) {
+            this.pause()
+        }
+        this.clearEvents();
         this.game.loadMap("John", "orange", "missile", "test", "default");
         this.hideNode(".main-menu");
+        this.hideNode(".pause-menu");
         this.showViewBorder();
     }
     
     mainMenu() {
         // this.game.frameQueue.clearQueue()
+        if (this.checkEvent("pause")) {
+            this.pause()
+        }
         this.clearEvents();
         this.game.loadMap("menuplayer", "pink", "mainmenuability");
         this.game.camera.followNewEntity(this.game.map.entities[1]);

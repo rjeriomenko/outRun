@@ -18,8 +18,7 @@ export default class Game {
         this.eventHandler = new EventHandler(this); // create evenHandler, which will load main menu map with main menu "player"
         this.frameQueue = new FrameQueue;
         this.frameTimer = setInterval(() => { this.update() }, (1000/60)); // update every frame at 60 frames per second -- Can be replaced with window.requestAnimationFrame()
-        window.addEventListener('keydown', (e) => { this.eventHandler.moveKey(e) }, false) // make repeat player movement browser-agnostic
-        window.addEventListener('keyup', (e) => { this.eventHandler.removeKey(e) }, false)
+        this.addEventListeners()
     };
 
     loadMap(playerName, playerColor, playerAbility, seed = "mainmenu", player = "mainmenu") {
@@ -30,11 +29,27 @@ export default class Game {
         this.map.addPlayerAndCamera(this.player, this.camera);
     };
 
-    newPauseFrameTimer() {
-        this.frameTimer = setInterval(() => { this.pauseUpdate() }, (1000 / 60));
+    addEventListeners() {
+        window.addEventListener('keydown', (e) => { this.eventHandler.moveKey(e) }, false); // allow eventHandler to handle kebyoard input
+        window.addEventListener('keyup', (e) => { this.eventHandler.removeKey(e) }, false); // make repeat player movement browser-agnostic
+        this.addMainMenuListeners();
+        this.addPauseMenuListeners();
     }
 
-    pauseUpdate() {
+    addMainMenuListeners() {
+        let mainmenu = document.querySelector('.')
+
+    }
+
+    addPauseMenuListeners() {
+
+    }
+
+    newPauseFrameTimer() {
+        this.frameTimer = setInterval(() => { this.updateWhilePaused() }, (1000 / 60));
+    }
+
+    updateWhilePaused() {
         this.frameQueue.frameQueueExecute();
         this.drawFrame(this.ctx, this.canvas, this.map);
     }
