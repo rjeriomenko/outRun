@@ -1,3 +1,9 @@
 li {
     list-style-type: none;
+    margin: none;
+}
+
+ul {
+    margin: 0px;
+    padding: 0px;
 }

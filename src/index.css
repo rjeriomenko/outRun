@@ -2,32 +2,61 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: black;
+    /* height: 100%; */
 }
 
 #view {
-    border: solid 1px black;
+    margin-top: 40px;
+    border: double 6px rgb(150, 150, 150);
+    border-radius: 240px;
+}
+
+li {
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 36px;
+    letter-spacing: 10px;
 }
 
 .main-menu {
-    position: absolute;
-    background-color: white;
+    position: fixed;
+    background-color: clear;
     width: 600px;
-    height: 600px;
-    margin-top: 76px;
+    height: 598px;
+    margin-top: 102px;
     flex-direction: column;
     visibility: hidden;
 }
 
 .pause-menu {
-    position: absolute;
-    background-color: white;
+    position: fixed;
+    background-color: clear;
     width: 600px;
-    height: 600px;
-    margin-top: 76px;
-    flex-direction: column;
+    height: 598px;
+    margin-top: 102px;
     visibility: hidden;
+    border: solid 4px white;
 }
 
-li {
-    margin: 80px 0px;
+.main-menu-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.pause-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.pause-list > li {
+    background: black;
 }

@@ -57,19 +57,34 @@ export default class EventHandler {
         let Node = document.querySelector(node);
         Node.style.visibility = "hidden"
     }
+
+    showViewBorder() {
+        let view = document.querySelector("#view");
+        view.style.border = "double 6px rgb(150, 150, 150)";
+    }
+
+    hideViewBorder() {
+        let view = document.querySelector("#view");
+        view.style.border = "none";
+
+    }
     
     test() { //LIKELY TO CHANGE TO LOAD MAP EVENT
+        // this.game.frameQueue.clearQueue()
         this.clearEvents()
         this.game.loadMap("John", "orange", "missile", "test", "default");
         this.hideNode(".main-menu");
+        this.showViewBorder();
     }
     
     mainMenu() {
+        // this.game.frameQueue.clearQueue()
         this.clearEvents();
         this.game.loadMap("menuplayer", "pink", "mainmenuability");
         this.game.camera.followNewEntity(this.game.map.entities[1]);
         this.addEvent("mainmenu");
         this.showNode(".main-menu");
+        this.hideViewBorder();
     };
 
     restoreFrameQueueAndFrameTimer() {

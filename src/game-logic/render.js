@@ -73,11 +73,12 @@ export default class Render {
         this.ctx.stroke();
     };
 
-    drawFollowingCRTLines() {  // draw CRT lines
+    drawFollowingCRTLines() {
         this.resetdrawStyle();
-        this.ctx.shadowBlur = 2;
+        this.ctx.fillStyle = "rgba(0, 0, 0, 0.6)"
         const crtLineWidth = 2.5;
         const crtLineSpacing = 5;
+
         let x = this.camera.currentViewCoords()[0];
         let yMin = this.camera.currentViewCoords()[1];
         let yMax = yMin + this.canvas.height;
@@ -87,11 +88,26 @@ export default class Render {
         }
     };
 
+    drawStaticCRTLines() {
+        this.resetdrawStyle();
+        const crtLineWidth = 2.5;
+        const crtLineSpacing = 5;
+        let x = -1500
+        let yMin = -1500
+        let yMax = yMin + this.canvas.height;
+
+        this.ctx.fillStyle = "rgba(20, 20, 20, 0.5)"
+
+        for (let y = yMin; y <= 6000; y += crtLineSpacing) {
+            this.ctx.fillRect(x, y, 4000, crtLineWidth);
+        }
+    };
+
     drawFloatingObject(xOffset, yOffset, xDim, yDim) {   ///xOffset and yOffset will offset along canvas grid
         this.resetdrawStyle();
         this.ctx.fillStyle = "white";
-        let xCoords = this.originCoords()[0] + xOffset
-        let yCoords = this.originCoords()[0] + yOffset
+        let xCoords = this.originCoords()[0] + xOffset;
+        let yCoords = this.originCoords()[0] + yOffset;
 
         this.ctx.fillRect(xCoords, yCoords, xDim, yDim)
     } ;
@@ -124,9 +140,10 @@ export default class Render {
         // this.drawClassicStyle(...entityPosAndDim, player);
         // this.drawLineStyle(...entityPosAndDim, player);
 
-        this.drawFloatingObject(150, 150, 100, 100);
-        this.drawFloatingObject(-250, 75, 100, 100);
-        this.drawFollowingCRTLines()
+        // this.drawFloatingObject(150, 150, 100, 100);
+        // this.drawFloatingObject(-250, 75, 100, 100);
+        // this.drawStaticCRTLines();
+        this.drawFollowingCRTLines();
     };
 
 }
