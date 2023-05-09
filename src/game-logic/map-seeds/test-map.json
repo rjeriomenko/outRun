@@ -4,7 +4,7 @@
             "bound-box": {
                 "absolutepositionx": -450,
                 "absolutepositiony": -450,
-                "dimensionx": 1500,
+                "dimensionx": 1450,
                 "dimensiony": 1400,
                 "sprite": "spriteurl",
                 "color": "black"

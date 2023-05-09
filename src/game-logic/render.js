@@ -4,18 +4,18 @@ export default class Render {
         this.ctx = ctx;
         this.canvas = canvas;
         this.map = map;
-        this.drawMap(map);
+        this.drawMap();
     }
 
     originCoords() {
-        let currentTransform = this.ctx.getTransform()
+        let currentTransform = this.ctx.getTransform();
         return [currentTransform.e, currentTransform.f];
     };
     
     clearMap() {
-        let [originCoordX, originCoordY] = this.originCoords()
+        let [originCoordX, originCoordY] = this.originCoords();
         this.ctx.clearRect(-originCoordX, -originCoordY, this.canvas.width, this.canvas.height);
-    }
+    };
 
     drawBackground(map) {
         const background = new Image();
@@ -24,9 +24,9 @@ export default class Render {
         background.dataset.posY = map.background.absolutepositiony;
         this.background = background;
         this.background.onload = () => {
-            this.ctx.drawImage(this.background, this.background.dataset.posX, this.background.dataset.posY)
-        }
-    }
+            this.ctx.drawImage(this.background, this.background.dataset.posX, this.background.dataset.posY);
+        };
+    };
 
     getEntityPositionAndDimension(entity) {
         let posX, posY, dimX, dimY;
@@ -39,19 +39,18 @@ export default class Render {
     }
 
     resetdrawStyle() {
-        delete this.ctx.strokeStyle;
-        delete this.ctx.fillStyle;
-        delete this.ctx.lineWidth;
-        delete this.ctx.shadowColor;
-        delete this.ctx.shadowBlur;
-
-    }
+        this.ctx.strokeStyle = "rgb(0, 0, 0)";
+        this.ctx.fillStyle = "rgb(0, 0, 0)";
+        this.ctx.lineWidth = 1;
+        this.ctx.shadowColor = "rgba(0, 0, 0, 0)";
+        this.ctx.shadowBlur = 0;
+    };
     
     drawClassicStyle(posX, posY, dimX, dimY, entity) {
         this.resetdrawStyle();
         this.ctx.fillStyle = entity.color;
         this.ctx.fillRect(posX, posY, dimX, dimY);
-    }
+    };
 
     drawLineStyle(posX, posY, dimX, dimY, entity) {
         this.resetdrawStyle();
@@ -60,7 +59,7 @@ export default class Render {
         this.ctx.beginPath();
         this.ctx.rect(posX, posY, dimX, dimY);
         this.ctx.stroke();
-    }
+    };
 
     drawLineBlurShadowStyle(posX, posY, dimX, dimY, entity) {
         this.resetdrawStyle();
@@ -71,38 +70,42 @@ export default class Render {
         this.ctx.beginPath();
         this.ctx.rect(posX, posY, dimX, dimY);
         this.ctx.stroke();
-    }
+    };
+
+    drawCRTLines() {  // draw CRT lines
+        console.log("running")
+    } 
 
 
-    drawMap(map) {
+    drawMap() {
+        let map = this.map
+        let entityPosAndDim
         this.clearMap();
         // this.drawBackground(map); //Uncomment this line to see a flashing grass png
-        for(const entityId in map.entities) {
+        for(let entityId in map.entities) {
             const entity = map.entities[entityId];
-            let entityPosAndDim = this.getEntityPositionAndDimension(entity);
+            entityPosAndDim = this.getEntityPositionAndDimension(entity);
             
-            if(entityId === "1") {
+            if(entityId === "1") {  // render boundbox (background)
                 this.drawClassicStyle(...entityPosAndDim, entity);
-            };
-
-            if (entityId !== "player" && entityId !== "1") {
+            } else if (entityId !== "player" && entityId !== "1" && !entity.enemyType) {  //render background objects
                 // this.drawClassicStyle(...entityPosAndDim, entity);
                 // this.drawLineStyle(...entityPosAndDim, entity);
                 this.drawLineBlurShadowStyle(...entityPosAndDim, entity);
-            };
-
-            if(entity.enemyType) {
+            } else if(entity.enemyType) {   // render enemies;
                 this.drawLineBlurShadowStyle(...entityPosAndDim, entity);
                 // this.drawLineStyle(...entityPosAndDim, entity);
-
-            }
-
-
-            // this.drawClassicStyle(...entityPosAndDim, entity);
-            // this.drawLineStyle(...entityPosAndDim, entity);
-            this.drawLineBlurShadowStyle(...entityPosAndDim, entity); // makes sure the player renders last
+            };
         }
-    }
+
+        let player = map.entities.player
+        entityPosAndDim = this.getEntityPositionAndDimension(player);
+        this.drawLineBlurShadowStyle(...entityPosAndDim, player); // render player after rendering background/enemies
+        // this.drawClassicStyle(...entityPosAndDim, player);
+        // this.drawLineStyle(...entityPosAndDim, player);
+
+        this.drawCRTLines()
+    };
 
 }
 console.log("render.js finished loading");
