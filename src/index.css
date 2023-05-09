@@ -44,7 +44,7 @@ li:not(:first-child):hover {
     border: solid 4px white;
 }
 
-.main-menu-list {
+#main-menu-list {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,7 +53,7 @@ li:not(:first-child):hover {
     height: 100%;
 }
 
-.pause-list {
+#pause-menu-list {
     display: flex;
     flex-direction: column;
     align-items: center;

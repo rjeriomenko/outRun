@@ -16,14 +16,37 @@ export default class EventHandler {
             case "pause":
                 this.pause()
                 break;
-            case "test":
-                this.test();
+            case "play":
+                this.loadMap("test");
                 break;
             case "enter":
                 //Enter logic
                 break;
+            case "instructions":
+                //Instructions logic
+                break;
+            case "gameover":
+                //GameOver logic
+                break;
         };
     };
+
+    addEventListeners() {
+        window.addEventListener('keydown', (e) => { this.moveKey(e) }, false); // allow eventHandler to handle kebyoard input
+        window.addEventListener('keyup', (e) => { this.removeKey(e) }, false); // make repeat player movement browser-agnostic
+        this.addMainMenuListeners();
+        this.addPauseMenuListeners();
+    }
+
+    addMainMenuListeners() {
+        let mainMenu = document.querySelector("#main-menu-list");
+        mainMenu.addEventListener('click', (e) => { this.triggerEvent(e.target.dataset.trigger) });
+    }
+
+    addPauseMenuListeners() {
+        let pauseMenu = document.querySelector("#pause-menu-list");
+        pauseMenu.addEventListener('click', (e) => { this.triggerEvent(e.target.dataset.trigger) });
+    }
 
     addEvent(event) {
         this.events.push(event);
@@ -69,12 +92,12 @@ export default class EventHandler {
 
     }
     
-    test() { //LIKELY TO CHANGE TO LOAD MAP EVENT
+    loadMap(map = "test") { //LIKELY TO CHANGE TO LOAD MAP EVENT
         if (this.checkEvent("pause")) {
             this.pause()
         }
         this.clearEvents();
-        this.game.loadMap("John", "orange", "missile", "test", "default");
+        this.game.loadMap("John", "orange", "missile", map, "default");
         this.hideNode(".main-menu");
         this.hideNode(".pause-menu");
         this.showViewBorder();
@@ -161,7 +184,7 @@ export default class EventHandler {
             case "Enter":
             case " ":
                 if (!e.repeat) {
-                    this.game.frameQueue.push(() => { this.triggerEvent("test") });
+                    this.game.frameQueue.push(() => { this.triggerEvent("play") });
                 }
                 break;
         }

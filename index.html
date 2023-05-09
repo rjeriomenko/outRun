@@ -13,19 +13,19 @@
 <body>
     <canvas id="view" height="720" width="1280"></canvas>
     <div class="main-menu">
-        <ul class="main-menu-list">
+        <ul id="main-menu-list">
             <li>outRun()</li>
-            <li>PLAY</li>
-            <li class="instructions">INSTRUCTIONS</li>
+            <li id="play" data-trigger="play">PLAY</li>
+            <li class="instructions" data-trigger="instructions">INSTRUCTIONS</li>
         </ul>
     </div>
     <div class="pause-menu">
-        <ul class="pause-list">
+        <ul id="pause-menu-list">
             <li>PAUSED</li>
-            <li>RESUME</li>
-            <li class="instructions">INSTRUCTIONS</li>
-            <li>QUIT</li>
-            <li>RESTART</li>
+            <li id="resume" data-trigger="pause">RESUME</li>
+            <li class="instructions" data-trigger="instructions">INSTRUCTIONS</li>
+            <li id="quit" data-trigger="mainmenu">QUIT</li>
+            <li id="restart" data-trigger="play">RESTART</li>
         </ul>
     </div>
 </body>
