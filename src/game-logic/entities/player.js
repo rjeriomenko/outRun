@@ -21,9 +21,11 @@ export default class Player extends Entity {
         this.maxHealth = this.seed.health || 300;
         this.currentHealth = this.maxHealth;
         this.damage = 5;
+        this.cooldownReduction = 1;
+        this.projectileCount = 1;
         this.experience = 0;
         this.level = 1;
-        this.experienceToLevelUp = this.seed.experiencetolevelup || 1;
+        this.experienceToLevelUp = this.seed.experiencetolevelup || 5;
         this.specialPool = LevelPool.special;
     };
 
@@ -66,6 +68,12 @@ export default class Player extends Entity {
             case "damage":
                 this.damage += 2
                 break;
+            case "ability-cooldown":
+                this.cooldownReduction -= 0.1;
+                break;
+            case "projectile-count":
+                this.projectileCount += 1;
+                break;
                 
         }
     }
@@ -97,8 +105,8 @@ export default class Player extends Entity {
 
     levelUp() {
         this.level += 1;
-        this.experienceToLevelUp *= 1;  //Need to tweak this
-        this.game.eventHandler.triggerEvent("levelup")
+        this.experienceToLevelUp *= 1.25;  //Need to tweak this
+        this.game.eventHandler.triggerEvent("levelup");
     };
 
     rollForPick(weighing) {

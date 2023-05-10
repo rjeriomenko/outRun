@@ -29,7 +29,7 @@ export default class Regen extends Ability {
     }
 
     coolDownReady() {
-        if (this.coolDownCounter === 0) {
+        if (this.coolDownCounter <= 0) {
             this.coolDownCounter = this.coolDownTimer;
             return true;
         } else {

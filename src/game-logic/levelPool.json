@@ -15,13 +15,14 @@
         "health-regen": {
             "weighing": 0.6,
             "color": "green"
-        },
-        "ability-cooldown": {
-            "weighing": 0.3,
-            "color": "red"
         }
     },
     "special": {
+        "ability-cooldown": {
+            "weighing": 0.4,
+            "color": "pink",
+            "count": 5
+        },
         "projectile-count": {
             "weighing": 0.2,
             "color": "yellow",
