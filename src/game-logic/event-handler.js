@@ -245,6 +245,13 @@ export default class EventHandler {
             this.showNode(".game-over-menu");
         };
     }
+    
+    formatChoiceName(unformattedChoice) {
+        console.log(unformattedChoice)
+        let upperName = unformattedChoice[0].toUpperCase();
+        let splitName = upperName.split("-");
+        return [splitName.join(" "), unformattedChoice[1]]
+    }
 
     populateLevelUpChoices() {
         let levelChoices = this.game.player.pullChoicesFromLevelPool();
@@ -252,15 +259,26 @@ export default class EventHandler {
         //Populate level up list menu with level up choices
         //aka manipualte inner text, then go to event trigger and handle which choice was chosen
 
+        let formattedChoice1 = this.formatChoiceName(levelChoices[0]);
+        let formattedChoice2 = this.formatChoiceName(levelChoices[1]);
+        let formattedChoice3 = this.formatChoiceName(levelChoices[2]);
+        
         let levelList = document.querySelector("#level-up-menu-list");
-        // let firstList = document.querySelector([levelupchoice1])
-        let firstList = levelList.firstElementChild.nextElementSibling
-        let secondList = levelList.firstElementChild.nextElementSibling.nextElementSibling
-        let thirdList = levelList.lastElementChild
+        let firstList = document.querySelector('[data-trigger="levelupchoice1"]');
+        let secondList = firstList.nextElementSibling;
+        let thirdList = levelList.lastElementChild;
 
-        firstList.textContent = levelChoices[0];
-        secondList.textContent = levelChoices[1];
-        thirdList.textContent = levelChoices[2];
+        console.log(formattedChoice1);
+        console.log(formattedChoice2);
+        console.log(formattedChoice3);
+
+        
+        firstList.textContent = formattedChoice1[0];
+        firstList.style.color = formattedChoice1[1];
+        secondList.textContent = formattedChoice2[0];
+        secondList.style.color = formattedChoice2[1];
+        thirdList.textContent = formattedChoice3[0];
+        thirdList.style.color = formattedChoice3[1];
     };
 
     levelUp() {

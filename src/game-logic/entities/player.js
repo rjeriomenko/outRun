@@ -22,7 +22,7 @@ export default class Player extends Entity {
         this.experience = 0;
         this.level = 1;
         this.experienceToLevelUp = this.seed.experiencetolevelup || 10;
-        this.levelPool = LevelPool;
+        this.specialPool = LevelPool.special;
     };
 
     static pickSeed(seed) {
@@ -61,7 +61,7 @@ export default class Player extends Entity {
 
     levelUp() {
         this.level += 1;
-        this.experienceToLevelUp *= 2;  //Need to tweak this
+        this.experienceToLevelUp *= 0.0001;  //Need to tweak this
         this.game.eventHandler.triggerEvent("levelup")
     };
 
@@ -76,7 +76,7 @@ export default class Player extends Entity {
             let poolKeys = Object.keys(pool);
             let randomIndex = Math.floor(Math.random() * poolKeys.length);
             let unrolledPick = poolKeys[randomIndex];
-            let weighing = pool[unrolledPick];
+            let weighing = pool[unrolledPick].weighing;
             if(this.rollForPick(weighing)) {
                 chosenPick = unrolledPick;
             }
@@ -85,27 +85,73 @@ export default class Player extends Entity {
         return chosenPick;
     };
 
-    pullStat() {
-        let stats = this.levelPool.stats;
-        return this.pickWithWeighing(stats);
+    pullStatAndColor() {
+        let stats = LevelPool.stats;
+        let pickedStat = this.pickWithWeighing(stats);
+        let color = stats[pickedStat].color
+
+        return [pickedStat, color];
     };
+
+    pullSpecialColorCount() {
+        let pickedSpecial = this.pickWithWeighing(this.specialPool);
+        let color = this.specialPool[pickedSpecial].color;
+        let count = this.specialPool[pickedSpecial].count;
+
+        return [pickedSpecial, color, count];
+    };
+
+    checkChoicesDuplicate(chosenArray, newChoice) {
+        for(let i = 0; i < chosenArray.length; i++) {
+            if(newChoice[0] === chosenArray[i][0]) {
+                return true;
+            };
+        };
+
+        return false;
+    }
 
     pullChoicesFromLevelPool() {   //pull from levelpool via weighing and amount allowed;
         let choices = [];
         let choice;
 
-        if (this.level % 3 === 0) {
-            //special leveling logic
-            // choice =
+        if (this.level % 3 === 0) { //special level-up
+            let unpushedLength = choices.length;
+            while (choices.length === unpushedLength) {
+                choice = this.pullSpecialColorCount();
+                if (choice[2] !== 0) {
+                    // this.specialPool[choice[0]].count -= 1; //NEEEEED PLAYER CHOSEN COUNT LOGIC
+                    choices.push([choice[0], choice[1]]);
+                }
+            }
+            while (choices.length < 3) {
+                if (Math.random() < 0.5) {
+                    unpushedLength = choices.length;
+                    while (choices.length === unpushedLength) {
+                        choice = this.pullSpecialColorCount();
+                        if (choice[2] !== 0 && !this.checkChoicesDuplicate(choices, choice)) {
+                            // this.specialPool[choice[0]].count -= 1;  //NEEEEED PLAYER CHOSEN COUNT LOGIC
+                            choices.push([choice[0], choice[1]]);
+                        };
+                    };
+                } else {
+                    choice = this.pullStatAndColor();
+                    if (!this.checkChoicesDuplicate(choices, choice)) {
+                        choices.push(choice);
+                    };
+                };
+            };
+
         } else {
-            while (choices.length < 3) {  //normal leveling logic
-                choice = this.pullStat();
-                if(!choices.includes(choice)) {
+            while (choices.length < 3) {  // regular level-up
+                choice = this.pullStatAndColor();
+                if (!this.checkChoicesDuplicate(choices, choice)) {
                     choices.push(choice);
                 };
             };
         };
 
+        console.log(choices);
         return choices;
     }
 }

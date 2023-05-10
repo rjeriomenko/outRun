@@ -109,6 +109,10 @@ li {
     padding: 7px;
 }
 
+#instructions-menu-list > li:first-of-type {
+    color: orange
+}
+
 #game-over-menu-list {
     display: flex;
     flex-direction: column;
@@ -127,6 +131,10 @@ li {
     height: 100%;
 }
 
+#level-up-menu-list > li {
+    font-size: 28px;
+}
+
 .pause-list > li {
     background: black;
 }
@@ -137,4 +145,5 @@ li:first-of-type {
 
 li[data-selected="true"]{
     outline: solid 5px white;
+    background: black;
 }

@@ -1,14 +1,51 @@
 {
     "stats": {
-        "health": 0.5,
-        "speed": 0.5,
-        "damage": 0.5,
-        "healthregen": 0.5
+        "health": {
+            "weighing": 0.5,
+            "color": "green"
+        },
+        "run-speed": {
+            "weighing": 0.5,
+            "color": "blue"
+        },
+        "damage": {
+            "weighing": 0.5,
+            "color": "red"
+        },
+        "health-regen": {
+            "weighing": 0.5,
+            "color": "green"
+        },
+        "ability-cooldown": {
+            "weighing": 0.5,
+            "color": "red"
+        }
     },
-    "specialstats": {
-        "projectilecount": 0.2
-    },
-    "abilities": {
-        "groundslam": 0.5
+    "special": {
+        "projectile-count": {
+            "weighing": 0.2,
+            "color": "yellow",
+            "count": -1
+        },
+        "ground-slam": {
+            "weighing": 0.5,
+            "color": "purple",
+            "count": 1
+        },
+        "projectile-explosion": {
+            "weighing": 0.2,
+            "color": "yellow",
+            "count": 1
+        },
+        "projectile-split": {
+            "weighing": 0.3,
+            "color": "yellow",
+            "count": -1
+        },
+        "dodge-chance": {
+            "weighing": 0.5,
+            "color": "aquamarine",
+            "count": -1
+        }
     }
 }
