@@ -32,8 +32,11 @@ export default class EventHandler {
     };
 
     addEventListeners() {
+        let gameContainer = document.querySelector('#game')
+
         window.addEventListener('keydown', (e) => { this.moveKey(e) }, false); // allow eventHandler to handle kebyoard input
         window.addEventListener('keyup', (e) => { this.removeKey(e) }, false); // make repeat player movement browser-agnostic
+        window.addEventListener('mousemove', (e) => { gameContainer.style.cursor = 'auto'} );
         this.addMainMenuListeners();
         this.addPauseMenuListeners();
     }
@@ -239,6 +242,9 @@ export default class EventHandler {
     };
 
     moveKey(e) {
+        let gameContainer = document.querySelector('#game')
+        gameContainer.style.cursor = 'none';  //hides mouse while using keyboard
+
         let k = e.key;
         let keyName = KeyboardWords[k]
         switch (k) {
