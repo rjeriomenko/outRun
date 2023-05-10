@@ -119,18 +119,19 @@ export default class Game {
         this.applyDeath();
     };
 
+    checkLevelUp() {
+        this.player.gainExperience(0);
+    }
+
     logicStep() {
         this.spawnEnemies();
         this.activateAbilities();
         this.moveEnemies();
         this.moveProjectiles();
         this.inflictDamage();
+        this.checkLevelUp();
         this.frameQueue.frameQueueExecute();
         this.camera.followEntity(); // update camera to new follow coordinates
-        console.log("current:")
-        console.log(this.player.currentHealth)
-        console.log("max:")
-        console.log(this.player.maxHealth)
     };
 
     drawFrame() {

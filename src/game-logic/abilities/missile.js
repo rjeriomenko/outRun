@@ -5,14 +5,20 @@ import MissileProjectile from '../entities/missile-projectile.js';
 export default class Missile extends Ability {
     constructor(player) {
         super(player);
-        this.damage = 5;
+        this.updateStats();
         this.projectileSpeed = 5;
         this.coolDownTimer = 60;
         this.coolDownCounter = 0;
         this.firedCount = 0;
     }
 
+    updateStats() {
+        this.damage = this.entity.damage * 1;
+        console.log(this.damage)
+    }
+
     activate() {
+        this.updateStats();
         if(this.coolDownReady()) {
             let fireCoords = this.entity.findEntityCenterCoords(this.entity);
             this.firedCount++;

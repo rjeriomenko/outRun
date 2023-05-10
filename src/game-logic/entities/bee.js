@@ -8,8 +8,8 @@ export default class Bee extends Enemy {
         this.color = "yellow";
         this.speed = 4;
         this.sprite = "spriteurl";
-        this.maxHealth = 3;
-        this.currentHealth = 3;
+        this.maxHealth = 4;
+        this.currentHealth = this.maxHealth;
         this.experience = 1;
         this.touchDamage = 1;
     }

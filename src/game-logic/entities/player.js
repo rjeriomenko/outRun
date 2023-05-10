@@ -20,9 +20,10 @@ export default class Player extends Entity {
         this.newAbility(ability);
         this.maxHealth = this.seed.health || 300;
         this.currentHealth = this.maxHealth;
+        this.damage = 5;
         this.experience = 0;
         this.level = 1;
-        this.experienceToLevelUp = this.seed.experiencetolevelup || 10;
+        this.experienceToLevelUp = this.seed.experiencetolevelup || 1;
         this.specialPool = LevelPool.special;
     };
 
@@ -56,9 +57,16 @@ export default class Player extends Entity {
                 if (!this.abilities[upgrade]) {
                     this.newAbility(upgrade);
                 } else {
-                    this.abilities[upgrade].increaseRegen(2.5)
-                }
+                    this.abilities[upgrade].increaseRegen(2.5);
+                };
                 break;
+            case "run-speed":
+                this.speed += 1
+                break;
+            case "damage":
+                this.damage += 2
+                break;
+                
         }
     }
 
@@ -81,7 +89,7 @@ export default class Player extends Entity {
 
     gainExperience(experience) {
         this.experience = this.experience + experience;
-        if(this.experience > this.experienceToLevelUp) {
+        if(this.experience >= this.experienceToLevelUp) {
             this.experience -= this.experienceToLevelUp;
             this.levelUp();
         };
