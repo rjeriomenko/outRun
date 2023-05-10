@@ -232,13 +232,8 @@ export default class EventHandler {
         this.menuKeySelect(keyName, selectedElement);
     }
 
-    move(direction, keyName) {
-        if (this.emptyEvents()) {
-            this.game.player.move(direction);
-        } else {
-            this.menuKeyPrepareSelect(keyName);
-
-        }
+    move(direction) {
+        this.game.player.move(direction);
     };
 
     moveKey(e) {
@@ -251,25 +246,41 @@ export default class EventHandler {
             case "ArrowUp":
             case "w":
                 if (!e.repeat) {
-                    this.game.frameQueue.everyQueuePush(`${keyName}`, () => { this.move([0, -1], keyName) }); //SCROLLING MIGHT BE TOO FAST
+                    if (this.emptyEvents()){
+                        this.game.frameQueue.everyQueuePush(`${keyName}`, () => { this.move([0, -1]) });
+                    } else {
+                        this.game.frameQueue.push(() => { this.menuKeyPrepareSelect(keyName) });
+                    }
                 }
                 break;
             case "ArrowRight":
             case "d":
                 if (!e.repeat) {
-                    this.game.frameQueue.everyQueuePush(`${keyName}`, () => { this.move([1, 0], keyName) });
+                    if (this.emptyEvents()) {
+                        this.game.frameQueue.everyQueuePush(`${keyName}`, () => { this.move([1, 0]) });
+                    } else {
+                        this.game.frameQueue.push(() => { this.menuKeyPrepareSelect(keyName) });
+                    }
                 }
                 break;
             case "ArrowDown":
             case "s":
                 if (!e.repeat) {
-                    this.game.frameQueue.everyQueuePush(`${keyName}`, () => { this.move([0, 1], keyName) });
+                    if (this.emptyEvents()) {
+                        this.game.frameQueue.everyQueuePush(`${keyName}`, () => { this.move([0, 1]) });
+                    } else {
+                        this.game.frameQueue.push(() => { this.menuKeyPrepareSelect(keyName) });
+                    }
                 }
                 break;
             case "ArrowLeft":
             case "a":
                 if (!e.repeat) {
-                    this.game.frameQueue.everyQueuePush(`${keyName}`, () => { this.move([-1, 0], keyName) });
+                    if (this.emptyEvents()) {
+                        this.game.frameQueue.everyQueuePush(`${keyName}`, () => { this.move([-1, 0]) });
+                    } else {
+                        this.game.frameQueue.push(() => { this.menuKeyPrepareSelect(keyName) });
+                    }
                 }
                 break;
             case "Escape":
