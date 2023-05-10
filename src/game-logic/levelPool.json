@@ -1,0 +1,14 @@
+{
+    "stats": {
+        "health": 0.5,
+        "speed": 0.5,
+        "damage": 0.5,
+        "healthregen": 0.5
+    },
+    "specialstats": {
+        "projectilecount": 0.2
+    },
+    "abilities": {
+        "groundslam": 0.5
+    }
+}

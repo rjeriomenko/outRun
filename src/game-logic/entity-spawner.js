@@ -50,11 +50,11 @@ export default class EntitySpawner {
         switch (enemyType) {
             case "bee":
                 this.beeCount += 1;
-                enemyInstance = new Bee(`bee${this.beeCount}`, { enemytype: "zombie" });
+                enemyInstance = new Bee(`bee${this.beeCount}`, { enemytype: "bee" });
                 break;
             case "zombie":
                 this.zombieCount += 1;
-                enemyInstance = new Zombie(`zombie${this.zombieCount}`, { enemytype: "bee" });
+                enemyInstance = new Zombie(`zombie${this.zombieCount}`, { enemytype: "zombie" });
                 break;
         };
 

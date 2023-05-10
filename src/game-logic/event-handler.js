@@ -29,12 +29,13 @@ export default class EventHandler {
                 this.gameOver();
                 break;
             case "levelup":
-                //leveluplogic
+                this.levelUp();
                 break;
             case "levelupchoice1":
             case "levelupchoice2":
             case "levelupchoice3":
-                //levelupchoicelogic
+                //PLAYER LEVELING UP CHOICES LOGIC
+                this.levelUp();
                 break;
         };
     };
@@ -48,6 +49,7 @@ export default class EventHandler {
         this.addMenuListeners("#pause-menu-list");
         this.addMenuListeners("#instructions-menu-list");
         this.addMenuListeners("#game-over-menu-list");
+        this.addMenuListeners("#level-up-menu-list");
     }
 
     clearListSelected() {
@@ -243,6 +245,39 @@ export default class EventHandler {
             this.showNode(".game-over-menu");
         };
     }
+
+    populateLevelUpChoices() {
+        let levelChoices = this.game.player.pullChoicesFromLevelPool();
+        console.log(levelChoices);
+        //Populate level up list menu with level up choices
+        //aka manipualte inner text, then go to event trigger and handle which choice was chosen
+
+        let levelList = document.querySelector("#level-up-menu-list");
+        // let firstList = document.querySelector([levelupchoice1])
+        let firstList = levelList.firstElementChild.nextElementSibling
+        let secondList = levelList.firstElementChild.nextElementSibling.nextElementSibling
+        let thirdList = levelList.lastElementChild
+
+        firstList.textContent = levelChoices[0];
+        secondList.textContent = levelChoices[1];
+        thirdList.textContent = levelChoices[2];
+    };
+
+    levelUp() {
+        if (this.checkEvent("levelup")) {
+            this.hideNode(".level-up-menu");
+            this.clearEvents();
+            this.game.newFrameTimer();
+        } else {
+        this.storeFrameQueueAndFrameTimer();
+        this.clearListSelected();
+        this.applyChildSelected("#level-up-menu-list");
+        this.game.newPauseFrameTimer();
+        this.populateLevelUpChoices();
+        this.addEvent("levelup");
+        this.showNode(".level-up-menu");
+        };
+    };
     
     navigateUpList(selectedElement) {
         selectedElement.dataset.selected = false;

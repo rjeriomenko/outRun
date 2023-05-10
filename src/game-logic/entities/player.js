@@ -5,6 +5,7 @@ import MainMenuPlayerSeed from '../main-menu-player.json';
 import Entity from './entity.js';
 import Missile from '../abilities/missile.js';
 import MainMenuAbility from '../abilities/main-menu-ability.js';
+import LevelPool from '../levelPool.json';
 
 
 export default class Player extends Entity {
@@ -21,6 +22,7 @@ export default class Player extends Entity {
         this.experience = 0;
         this.level = 1;
         this.experienceToLevelUp = this.seed.experiencetolevelup || 10;
+        this.levelPool = LevelPool;
     };
 
     static pickSeed(seed) {
@@ -59,7 +61,52 @@ export default class Player extends Entity {
 
     levelUp() {
         this.level += 1;
-        this.experienceToLevelUp *= 2;      
+        this.experienceToLevelUp *= 2;  //Need to tweak this
+        this.game.eventHandler.triggerEvent("levelup")
     };
+
+    rollForPick(weighing) {
+        return weighing > Math.random();
+    }
+
+    pickWithWeighing(pool) {
+        let chosenPick;
+
+        while(!chosenPick) {
+            let poolKeys = Object.keys(pool);
+            let randomIndex = Math.floor(Math.random() * poolKeys.length);
+            let unrolledPick = poolKeys[randomIndex];
+            let weighing = pool[unrolledPick];
+            if(this.rollForPick(weighing)) {
+                chosenPick = unrolledPick;
+            }
+        }
+
+        return chosenPick;
+    };
+
+    pullStat() {
+        let stats = this.levelPool.stats;
+        return this.pickWithWeighing(stats);
+    };
+
+    pullChoicesFromLevelPool() {   //pull from levelpool via weighing and amount allowed;
+        let choices = [];
+        let choice;
+
+        if (this.level % 3 === 0) {
+            //special leveling logic
+            // choice =
+        } else {
+            while (choices.length < 3) {  //normal leveling logic
+                choice = this.pullStat();
+                if(!choices.includes(choice)) {
+                    choices.push(choice);
+                };
+            };
+        };
+
+        return choices;
+    }
 }
 console.log("player.js finished loading");
