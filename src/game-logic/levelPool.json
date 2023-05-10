@@ -1,6 +1,6 @@
 {
     "stats": {
-        "health": {
+        "max-health": {
             "weighing": 0.5,
             "color": "green"
         },
@@ -13,11 +13,11 @@
             "color": "red"
         },
         "health-regen": {
-            "weighing": 0.5,
+            "weighing": 0.6,
             "color": "green"
         },
         "ability-cooldown": {
-            "weighing": 0.5,
+            "weighing": 0.3,
             "color": "red"
         }
     },
@@ -32,7 +32,7 @@
             "color": "purple",
             "count": 1
         },
-        "projectile-explosion": {
+        "attack-explosion": {
             "weighing": 0.2,
             "color": "yellow",
             "count": 1

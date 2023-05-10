@@ -107,7 +107,7 @@ export default class Game {
     applyDeath() {
         for (const entity in this.map.entities) {
             let ent = this.map.entities[entity];
-            if (typeof ent.health === "number" && ent.health <= 0) {
+            if (typeof ent.currentHealth === "number" && ent.currentHealth <= 0) {
                 this.frameQueue.push(() => { ent.onDeath() });
             };
         };
@@ -127,6 +127,10 @@ export default class Game {
         this.inflictDamage();
         this.frameQueue.frameQueueExecute();
         this.camera.followEntity(); // update camera to new follow coordinates
+        console.log("current:")
+        console.log(this.player.currentHealth)
+        console.log("max:")
+        console.log(this.player.maxHealth)
     };
 
     drawFrame() {

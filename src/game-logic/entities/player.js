@@ -3,9 +3,10 @@ console.log("player.js started loading");
 import DefaultPlayerSeed from '../default-player.json';
 import MainMenuPlayerSeed from '../main-menu-player.json';
 import Entity from './entity.js';
+import LevelPool from '../levelPool.json';
 import Missile from '../abilities/missile.js';
 import MainMenuAbility from '../abilities/main-menu-ability.js';
-import LevelPool from '../levelPool.json';
+import Regen from '../abilities/regen.js';
 
 
 export default class Player extends Entity {
@@ -15,10 +16,10 @@ export default class Player extends Entity {
         this.seed = Player.pickSeed(seed);
         this.map = map;
         this.color = this.seed.color || color || "pink";
-        this.abilities = { 
-            ability: this.newAbility(ability)
-        };
-        this.health = this.seed.health || 300;
+        this.abilities = {};
+        this.newAbility(ability);
+        this.maxHealth = this.seed.health || 300;
+        this.currentHealth = this.maxHealth;
         this.experience = 0;
         this.level = 1;
         this.experienceToLevelUp = this.seed.experiencetolevelup || 10;
@@ -35,20 +36,47 @@ export default class Player extends Entity {
     }
 
     damagePlayerHealth(damage) {
-        this.health -= damage;
+        this.currentHealth -= damage;
     };
 
     onDeath() {
         this.game.eventHandler.triggerEvent("gameover")
     };
 
+    gainUpgrade(upgrade) {
+        if (this.specialPool[upgrade]) {
+            this.specialPool[upgrade].count -= 1
+        }
+
+        switch (upgrade) {
+            case "max-health": 
+                this.maxHealth += 60;
+                break;
+            case "health-regen":
+                if (!this.abilities[upgrade]) {
+                    this.newAbility(upgrade);
+                } else {
+                    this.abilities[upgrade].increaseRegen(2.5)
+                }
+                break;
+        }
+    }
+
     newAbility(ability) {
+        let abilityInstance;
         switch(ability) {
             case "missile":
-                return new Missile(this);
+                abilityInstance = new Missile(this);
+                break;
             case "mainmenuability":
-                return new MainMenuAbility(this);
+                abilityInstance = new MainMenuAbility(this);
+                break;
+            case "health-regen":
+                abilityInstance = new Regen(this);
+                break;
         }
+
+        this.abilities[ability] = abilityInstance;
     }
 
     gainExperience(experience) {
@@ -61,7 +89,7 @@ export default class Player extends Entity {
 
     levelUp() {
         this.level += 1;
-        this.experienceToLevelUp *= 0.0001;  //Need to tweak this
+        this.experienceToLevelUp *= 1;  //Need to tweak this
         this.game.eventHandler.triggerEvent("levelup")
     };
 
@@ -120,7 +148,6 @@ export default class Player extends Entity {
             while (choices.length === unpushedLength) {
                 choice = this.pullSpecialColorCount();
                 if (choice[2] !== 0) {
-                    // this.specialPool[choice[0]].count -= 1; //NEEEEED PLAYER CHOSEN COUNT LOGIC
                     choices.push([choice[0], choice[1]]);
                 }
             }
@@ -130,7 +157,6 @@ export default class Player extends Entity {
                     while (choices.length === unpushedLength) {
                         choice = this.pullSpecialColorCount();
                         if (choice[2] !== 0 && !this.checkChoicesDuplicate(choices, choice)) {
-                            // this.specialPool[choice[0]].count -= 1;  //NEEEEED PLAYER CHOSEN COUNT LOGIC
                             choices.push([choice[0], choice[1]]);
                         };
                     };
@@ -151,7 +177,6 @@ export default class Player extends Entity {
             };
         };
 
-        console.log(choices);
         return choices;
     }
 }

@@ -34,7 +34,8 @@ export default class EventHandler {
             case "levelupchoice1":
             case "levelupchoice2":
             case "levelupchoice3":
-                //PLAYER LEVELING UP CHOICES LOGIC
+                let upgradeChoice = document.querySelector(`[data-trigger="${event}"]`)
+                this.game.player.gainUpgrade(upgradeChoice.dataset.upgrade);
                 this.levelUp();
                 break;
         };
@@ -247,38 +248,32 @@ export default class EventHandler {
     }
     
     formatChoiceName(unformattedChoice) {
-        console.log(unformattedChoice)
         let upperName = unformattedChoice[0].toUpperCase();
         let splitName = upperName.split("-");
         return [splitName.join(" "), unformattedChoice[1]]
     }
 
-    populateLevelUpChoices() {
+    populateLevelUpChoices() {  //Populate level up list menu with level up choices
         let levelChoices = this.game.player.pullChoicesFromLevelPool();
-        console.log(levelChoices);
-        //Populate level up list menu with level up choices
-        //aka manipualte inner text, then go to event trigger and handle which choice was chosen
 
         let formattedChoice1 = this.formatChoiceName(levelChoices[0]);
         let formattedChoice2 = this.formatChoiceName(levelChoices[1]);
         let formattedChoice3 = this.formatChoiceName(levelChoices[2]);
         
         let levelList = document.querySelector("#level-up-menu-list");
-        let firstList = document.querySelector('[data-trigger="levelupchoice1"]');
-        let secondList = firstList.nextElementSibling;
-        let thirdList = levelList.lastElementChild;
-
-        console.log(formattedChoice1);
-        console.log(formattedChoice2);
-        console.log(formattedChoice3);
-
+        let firstInList = document.querySelector('[data-trigger="levelupchoice1"]');
+        let secondInList = firstInList.nextElementSibling;
+        let thirdInList = levelList.lastElementChild;
         
-        firstList.textContent = formattedChoice1[0];
-        firstList.style.color = formattedChoice1[1];
-        secondList.textContent = formattedChoice2[0];
-        secondList.style.color = formattedChoice2[1];
-        thirdList.textContent = formattedChoice3[0];
-        thirdList.style.color = formattedChoice3[1];
+        firstInList.textContent = formattedChoice1[0];
+        firstInList.style.color = formattedChoice1[1];
+        firstInList.dataset.upgrade = levelChoices[0][0];
+        secondInList.textContent = formattedChoice2[0];
+        secondInList.style.color = formattedChoice2[1];
+        secondInList.dataset.upgrade = levelChoices[1][0];
+        thirdInList.textContent = formattedChoice3[0];
+        thirdInList.style.color = formattedChoice3[1];
+        thirdInList.dataset.upgrade = levelChoices[2][0];
     };
 
     levelUp() {

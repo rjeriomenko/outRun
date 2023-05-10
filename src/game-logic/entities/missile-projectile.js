@@ -49,7 +49,7 @@ export default class MissileProjectile extends Projectile {
         let targetEnemy = this.collidingEnemy();
         
         if (targetEnemy) {
-            targetEnemy.health -= this.damage;
+            targetEnemy.damageEnemyHealth(this.damage);
             this.onDeath();
         };
     };

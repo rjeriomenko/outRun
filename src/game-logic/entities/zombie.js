@@ -8,7 +8,8 @@ export default class Zombie extends Enemy {
         this.color = "green";
         this.speed = 2.5;
         this.sprite = "spriteurl";
-        this.health = 6;
+        this.maxHealth = 6;
+        this.currentHealth = 6;
         this.experience = 2;
         this.touchDamage = 3;
 

@@ -32,6 +32,10 @@ export default class Enemy extends Entity {
             this.map.entities.player.damagePlayerHealth(this.touchDamage);
         };
     };
+
+    damageEnemyHealth(damage) {
+        this.currentHealth -= damage;
+    };
 }
 
 console.log("enemy.js finished loading");
