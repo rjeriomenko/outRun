@@ -1,5 +1,6 @@
 body {
     background-color: black;
+    font-family: 'Roboto Mono', monospace;
 }
 
 #game {
@@ -17,7 +18,6 @@ body {
 
 li {
     color: white;
-    font-family: 'Roboto Mono', monospace;
     font-size: 36px;
     letter-spacing: 10px;
     text-indent: 10px;
@@ -44,6 +44,36 @@ li {
     border: solid 4px white;
 }
 
+.instructions-menu {
+    position: fixed;
+    background-color: clear;
+    width: 600px;
+    height: 598px;
+    margin-top: 102px;
+    visibility: hidden;
+    border: solid 4px white;
+}
+
+.game-over-menu {
+    position: fixed;
+    background-color: clear;
+    width: 600px;
+    height: 598px;
+    margin-top: 102px;
+    visibility: hidden;
+    border: solid 4px white;
+}
+
+.level-up-menu {
+    position: fixed;
+    background-color: clear;
+    width: 600px;
+    height: 598px;
+    margin-top: 102px;
+    visibility: hidden;
+    border: solid 4px white;
+}
+
 #main-menu-list {
     display: flex;
     flex-direction: column;
@@ -54,6 +84,41 @@ li {
 }
 
 #pause-menu-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+#instructions-menu-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+#instructions-menu-list > li {
+    font-size: 21px;
+    color: white;
+    letter-spacing: 0px;
+    text-indent: 0px;
+    padding: 7px;
+}
+
+#game-over-menu-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+#level-up-menu-list {
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -8,8 +8,9 @@ import MainMenuAbility from '../abilities/main-menu-ability.js';
 
 
 export default class Player extends Entity {
-    constructor(map, seed, name = "John", color = "pink", ability = "missile") {
+    constructor(game, map, seed, name = "John", color = "pink", ability = "missile") {
         super(name, Player.pickSeed(seed));
+        this.game = game;
         this.seed = Player.pickSeed(seed);
         this.map = map;
         this.color = this.seed.color || color || "pink";
@@ -36,7 +37,7 @@ export default class Player extends Entity {
     };
 
     onDeath() {
-        debugger
+        this.game.eventHandler.triggerEvent("gameover")
     };
 
     newAbility(ability) {

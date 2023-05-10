@@ -16,15 +16,23 @@ export default class Game {
         this.ctx = ctx;
         this.canvas = canvas;
         this.eventHandler = new EventHandler(this); // create evenHandler, which will load main menu map with main menu "player"
-        this.frameQueue = new FrameQueue;
-        this.frameTimer = setInterval(() => { this.update() }, (1000/60)); // update every frame at 60 frames per second -- Can be replaced with window.requestAnimationFrame()
+        this.frameQueue = new FrameQueue();
+        this.newFrameTimer() // update every frame at 60 frames per second -- Can be replaced with window.requestAnimationFrame()
         this.eventHandler.addEventListeners()
     };
+
+    newFrameTimer() {
+        if(this.frameTimer) {
+            clearInterval(this.frameTimer);
+        };
+
+        this.frameTimer = setInterval(() => { this.update() }, (1000 / 60));
+    }
 
     loadMap(playerName, playerColor, playerAbility, seed = "mainmenu", player = "mainmenu") {
         if (this.frameQueue) { this.frameQueue.clearQueue() }
         this.map = new Map(seed);
-        this.player = new Player(this.map, player, playerName, playerColor, playerAbility);
+        this.player = new Player(this, this.map, player, playerName, playerColor, playerAbility);
         this.camera = new Camera(this.ctx, this.canvas, this.map, this.player);
         this.map.addPlayerAndCamera(this.player, this.camera);
     };
@@ -40,7 +48,7 @@ export default class Game {
 
     restoreFrameQueueAndFrameTimer(restoreQueue) {
         this.frameQueue = new FrameQueue(restoreQueue);
-        this.frameTimer = setInterval(() => { this.update() }, (1000 / 60));
+        this.newFrameTimer()
     }
 
     update() {
