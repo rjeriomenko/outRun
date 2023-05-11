@@ -9,6 +9,7 @@ import MainMenuAbility from '../abilities/main-menu-ability.js';
 import Regen from '../abilities/regen.js';
 import ProjectileSplit from '../abilities/projectile-split.js';
 import AttackExplosion from '../abilities/attack-explosion.js';
+import GroundSlam from '../abilities/ground-slam.js';
 
 
 export default class Player extends Entity {
@@ -94,6 +95,9 @@ export default class Player extends Entity {
             case "attack-explosion":
                 this.newOnHitEffect(upgrade);
                 break;
+            case "ground-slam":
+                this.newAbility(upgrade)
+                break;
                 
         }
     }
@@ -109,6 +113,9 @@ export default class Player extends Entity {
                 break;
             case "health-regen":
                 abilityInstance = new Regen(this);
+                break;
+            case "ground-slam":
+                abilityInstance = new GroundSlam(this)
                 break;
         }
 

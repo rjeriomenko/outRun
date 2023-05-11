@@ -144,7 +144,6 @@ export default class Game {
         for (const entity in this.map.entities) {
             let ent = this.map.entities[entity];
             if(ent.duration && ent.enemyType) {
-            console.log(ent.duration)
                 if (ent.duration <= 1) {
                     ent.lessXPDeath()
                 } else {

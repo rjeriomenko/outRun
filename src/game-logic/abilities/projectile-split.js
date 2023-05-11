@@ -40,8 +40,8 @@ export default class ProjectileSplit extends Ability {
             this.entity.map.addEntity(instance1);
             this.entity.map.addEntity(instance2);
 
-            instance1.missileCountCheck();
-            instance2.missileCountCheck();
+            instance1.projectileCountCheck();
+            instance2.projectileCountCheck();
 
             this.splitCount++;
         }

@@ -10,6 +10,7 @@ export default class Missile extends Ability {
         this.coolDownTimer = 60 * this.cooldownReduction;
         this.coolDownCounter = 0;
         this.currentProjectileCount = 0;
+        this.firedCount = 0;
     }
 
     updateStats() {

@@ -7,7 +7,7 @@ export default class AttackExplosion extends Ability {
         super(player);
         this.duration = 6;
         this.explosionCount = 0;
-        this.dimension = [100, 100]
+        this.dimension = [60, 60]
     }
 
     updateStats() {
@@ -47,7 +47,8 @@ export default class AttackExplosion extends Ability {
             "duration": this.duration,
             "absolutepositionx": offsetFireCoords[0],
             "absolutepositiony": offsetFireCoords[1],
-            "dimension": [this.dimension[0], this.dimension[1]]
+            "dimension": [this.dimension[0], this.dimension[1]],
+            "entity": this.entity,
         }
         
         let explosion = new Explosion(`${sourceEntity.name}-explosion${this.explosionCount}`, explosionProperties);

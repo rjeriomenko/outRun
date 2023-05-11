@@ -67,7 +67,7 @@ export default class MissileProjectile extends Projectile {
         };
     };
 
-    missileCountCheck() {
+    projectileCountCheck() {
         let missileCount = 0;
         for (const entity in this.map.entities) {
             if(entity.projectileType === "missile") {

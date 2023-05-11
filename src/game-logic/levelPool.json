@@ -21,7 +21,7 @@
         "ability-cooldown": {
             "weighing": 0.7,
             "color": "pink",
-            "count": 8
+            "count": 5
         },
         "projectile-count": {
             "weighing": 0.3,
@@ -29,17 +29,17 @@
             "count": -1
         },
         "ground-slam": {
-            "weighing": 0.5,
+            "weighing": 1,
             "color": "purple",
             "count": 1
         },
         "attack-explosion": {
-            "weighing": 0.2,
+            "weighing": 1,
             "color": "yellow",
             "count": 1
         },
         "projectile-split": {
-            "weighing": 0.1,
+            "weighing": 1,
             "color": "yellow",
             "count": 2
         },
