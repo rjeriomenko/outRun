@@ -20,7 +20,6 @@
         <a href="https://www.linkedin.com/in/rokas-jeriomenko-82b312121/">
             <img src="linkedin-mark.png" alt="Link to Linkedin.">
         </a>
-        
     </header>
 
     <div id="game">
@@ -46,14 +45,14 @@
         <div class="instructions-menu">
             <ul id="instructions-menu-list">
                 <li>INSTRUCTI()NS</li>
-                <li>Navigate menus with mouse/arrow keys/WASD.</li>
-                <li>Select options with mouseclick/enter/spacebar.</li>
-                <li>Pause with escape/P.</li>
-                <li>Run with arrow keys/WASD.</li>
+                <li>Navigate menus with <span>mouse/arrow keys/WASD</span>.</li>
+                <li>Select options with <span>mouseclick/enter/spacebar</span>.</li>
+                <li>Pause with <span>escape/P</span>.</li>
+                <li>Run with <span>arrow keys/WASD</span>.</li>
                 <li>Health is top-right. Score is below.</li>
                 <li>You attack automatically.</li>
                 <li>Defeat them to get stronger.</li>
-                <li>Time makes everyone stronger.</li>
+                <li>Time makes <span id="red">everyone</span> stronger.</li>
                 <li>Survive for as l()ng as you can.</li>
                 <li data-trigger="instructions">CLOSE</li>
             </ul>
@@ -62,6 +61,7 @@
         <div class="game-over-menu">
             <ul id="game-over-menu-list">
                 <li>GAME ()VER</li>
+                <li id="score">YOUR SCORE: <span id="blue">0</span></li>
                 <li data-trigger="play">RESTART</li>
                 <li data-trigger="mainmenu">QUIT</li>
             </ul>

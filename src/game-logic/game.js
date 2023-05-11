@@ -55,6 +55,9 @@ export default class Game {
         if (this.eventHandler.emptyEvents()) {
             this.map.activeTimer++;
         }
+        let gameOverScore = document.querySelector("#blue")
+        // console.log(gameOverScore)
+        gameOverScore.textContent = `${Math.floor(this.map.activeTimer / 30)}`
     }
 
     advanceMapDifficulty() {
