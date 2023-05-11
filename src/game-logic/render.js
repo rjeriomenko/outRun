@@ -1,10 +1,11 @@
 console.log("render.js started loading");
 export default class Render {
-    constructor(ctx, canvas, map, camera) {
+    constructor(ctx, canvas, map, camera, eventHandler) {
         this.ctx = ctx;
         this.canvas = canvas;
         this.map = map;
-        this.camera = camera
+        this.camera = camera;
+        this.eventHandler = eventHandler
         this.drawMap();
     }
 
@@ -112,6 +113,57 @@ export default class Render {
         this.ctx.fillRect(xCoords, yCoords, xDim, yDim)
     } ;
 
+    drawHealth() {
+        let x = this.camera.currentViewCoords()[0];
+        let y = this.camera.currentViewCoords()[1];
+        let currentHealth = this.map.entities.player.currentHealth;
+        let maxHealth = this.map.entities.player.maxHealth;
+        
+        if (this.eventHandler.emptyEvents()) {
+            this.resetdrawStyle();
+            this.ctx.shadowBlur = 40;
+            this.ctx.fillStyle = "white";
+            this.ctx.lineWidth = 4.5;
+            this.ctx.font = "56px Roboto Mono";
+            this.ctx.shadowColor = "blue";
+
+            if (currentHealth <= maxHealth / 2) {
+                this.ctx.shadowColor = "red";
+            }
+
+            this.ctx.fillText(`${Math.ceil(this.map.entities.player.currentHealth / 15)}`, x + this.canvas.width - 200, y + 150);
+        }
+        
+    }
+
+    drawScore() {
+        let x = this.camera.currentViewCoords()[0];
+        let y = this.camera.currentViewCoords()[1];
+        let currentHealth = this.map.entities.player.currentHealth;
+        let maxHealth = this.map.entities.player.maxHealth;
+
+        if (this.eventHandler.emptyEvents()) {
+            this.resetdrawStyle();
+            this.ctx.shadowBlur = 15;
+            this.ctx.fillStyle = "white";
+            this.ctx.lineWidth = 4.5;
+            this.ctx.font = "52px Roboto Mono";
+            this.ctx.shadowColor = "blue";
+
+            if (currentHealth <= maxHealth / 2) {
+                this.ctx.shadowColor = "red";
+            }
+
+            this.ctx.fillText(`${Math.floor(this.map.activeTimer / 30)}`, x + (this.canvas.width / 2) - 35, y + 690);
+        }
+
+    }
+
+    drawHUD() {
+        this.drawHealth();
+        this.drawScore();
+    }
+
 
     drawMap() {
         let map = this.map
@@ -140,9 +192,7 @@ export default class Render {
         // this.drawClassicStyle(...entityPosAndDim, player);
         // this.drawLineStyle(...entityPosAndDim, player);
 
-        // this.drawFloatingObject(150, 150, 100, 100);
-        // this.drawFloatingObject(-250, 75, 100, 100);
-        // this.drawStaticCRTLines();
+        this.drawHUD()
         this.drawFollowingCRTLines();
     };
 

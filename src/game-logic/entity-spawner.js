@@ -38,10 +38,10 @@ export default class EntitySpawner {
     spawnReady() {  // plays a big part in keeping the game lively
         if (
             Object.keys(this.map.entities).length < 25 &&
-            this.spawnCounter > 1 &&
+            this.spawnCounter > 2 &&
             this.map.activeTimer !== 0
         ) {
-            this.spawnCounter = 1;
+            this.spawnCounter = 2;
             return this.spawnReady();
         }
 

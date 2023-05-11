@@ -169,7 +169,7 @@ export default class Game {
     };
 
     drawFrame() {
-        new Render(this.ctx, this.canvas, this.map, this.camera);
+        new Render(this.ctx, this.canvas, this.map, this.camera, this.eventHandler);
     };
 }
 
