@@ -26,7 +26,6 @@ A README that gives context for users unfamiliar with the game.
 
 Wireframes
 https://wireframe.cc/icylla
-![Picture of wireframe](https://assets.digitalocean.com/articles/alligator/boo.svg "Wireframe")
 ![Picture of wireframe](wireframe.png "Wireframe") 
 
 
