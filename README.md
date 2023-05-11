@@ -19,14 +19,15 @@ Choose from a random selection of character upgrades upon level up.
 In addition, this project will include:
 
 A dynamic and visually appealing main menu.
-Music that can be muted or adjusted.
+Toggleable music that is unique to each menu.
 A pause menu with quit and restart functionality.
 A README that gives context for users unfamiliar with the game.
 
 
 Wireframes
 https://wireframe.cc/icylla
-![Picture of wireframe](relative%20./wireframe.png?raw=true "Wireframe")
+![Picture of wireframe](https://assets.digitalocean.com/articles/alligator/boo.svg "Wireframe")
+![Picture of wireframe](wireframe.png "Wireframe") 
 
 
 Technologies, Libraries, APIs
@@ -49,3 +50,10 @@ Thursday Morning
 Deploy to GitHub pages and create production README.
 
 This project is available exclusively for non-profit, educational purposes.
+
+Music credits:
+
+METAROOM - The Purge Event
+Oliver Buckland - Dead God Graveyard
+Macintosh Plus - Lisa Frank 420 / Modern Computing
+Scattle - To the Top
