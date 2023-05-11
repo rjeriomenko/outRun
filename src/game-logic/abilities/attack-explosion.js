@@ -1,4 +1,4 @@
-console.log("missile.js started loading");
+console.log("attack-explosion.js started loading");
 import Ability from './ability.js';
 import Explosion from '../entities/explosion.js';
 
@@ -56,4 +56,4 @@ export default class AttackExplosion extends Ability {
         this.entity.map.addEntity(explosion);
     }
 }
-console.log("missile.js finished loading");
+console.log("attack-explosion.js finished loading");

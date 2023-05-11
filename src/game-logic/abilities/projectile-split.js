@@ -1,4 +1,4 @@
-console.log("missile.js started loading");
+console.log("projectile-split.js started loading");
 import Ability from './ability.js';
 
 export default class ProjectileSplit extends Ability {
@@ -47,4 +47,4 @@ export default class ProjectileSplit extends Ability {
         }
     }
 }
-console.log("missile.js finished loading");
+console.log("projectile-split.js finished loading");

@@ -1,7 +1,31 @@
+html, body {
+    overflow: hidden;
+}
+
 body {
     background-color: black;
     font-family: 'Roboto Mono', monospace;
     color: white;
+}
+
+header {
+    margin-top: 10px;
+    height: 64px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+header img {
+    background-color: black;
+    height: 64px;
+    width: auto;
+    margin: 0px 20px;
+    opacity: 0.8;
+}
+
+img:hover {
+    opacity: 1;
 }
 
 #game {
@@ -12,7 +36,6 @@ body {
 }
 
 #view {
-    margin-top: 40px;
     border: double 6px rgb(150, 150, 150);
     border-radius: 240px;
 }

@@ -47,3 +47,5 @@ Give player character and enemies sprites. Create mainMenu event. Give backgroun
 
 Thursday Morning
 Deploy to GitHub pages and create production README.
+
+This project is available exclusively for non-profit, educational purposes.

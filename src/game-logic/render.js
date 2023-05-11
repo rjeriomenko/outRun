@@ -169,7 +169,6 @@ export default class Render {
         let map = this.map
         let entityPosAndDim
         this.clearMap();
-        // this.drawBackground(map); //Uncomment this line to see a flashing grass png
         for(let entityId in map.entities) {
             const entity = map.entities[entityId];
             entityPosAndDim = this.getEntityPositionAndDimension(entity);
