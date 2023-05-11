@@ -24,7 +24,7 @@
             "count": 5
         },
         "projectile-count": {
-            "weighing": 0.2,
+            "weighing": 0.3,
             "color": "yellow",
             "count": -1
         },
@@ -39,14 +39,14 @@
             "count": 1
         },
         "projectile-split": {
-            "weighing": 0.3,
+            "weighing": 0.2,
             "color": "yellow",
             "count": -1
         },
         "dodge-chance": {
             "weighing": 0.5,
             "color": "aquamarine",
-            "count": -1
+            "count": 10
         }
     }
 }

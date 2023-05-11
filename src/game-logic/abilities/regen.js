@@ -15,7 +15,6 @@ export default class Regen extends Ability {
     }
 
     activate() {
-        debugger
         if (this.coolDownReady()) {
             let possibleHealth = this.entity.currentHealth + this.regenAmount;
             if (possibleHealth >= this.entity.maxHealth) {

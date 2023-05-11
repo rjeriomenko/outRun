@@ -10,13 +10,14 @@ export default class Missile extends Ability {
         this.coolDownTimer = 60 * this.cooldownReduction;
         this.coolDownCounter = 0;
         this.currentProjectileCount = 0;
-        this.firedCount = 0; 
+        this.firedCount = 0;
     }
 
     updateStats() {
         this.damage = this.entity.damage * 1;
         this.coolDownTimer = 60 * this.entity.cooldownReduction;
         this.maxProjectileCount = this.entity.projectileCount;
+        this.onHitEffects = this.entity.onHitEffects;
     }
 
     randomSign(){
@@ -44,7 +45,9 @@ export default class Missile extends Ability {
                     "damage": this.damage,
                     "speed": this.projectileSpeed,
                     "absolutepositionx": offsetFireCoords[0],
-                    "absolutepositiony": offsetFireCoords[1]
+                    "absolutepositiony": offsetFireCoords[1],
+                    "entity": this.entity,
+                    "onhiteffects": this.onHitEffects
                 }
                 this.map.addEntity(new MissileProjectile(`missile${this.firedCount}`, MissileProperties));
                 this.firedCount++;

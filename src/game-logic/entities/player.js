@@ -7,6 +7,7 @@ import LevelPool from '../levelPool.json';
 import Missile from '../abilities/missile.js';
 import MainMenuAbility from '../abilities/main-menu-ability.js';
 import Regen from '../abilities/regen.js';
+import ProjectileSplit from '../abilities/projectile-split.js';
 
 
 export default class Player extends Entity {
@@ -18,14 +19,16 @@ export default class Player extends Entity {
         this.color = this.seed.color || color || "pink";
         this.abilities = {};
         this.newAbility(ability);
+        this.onHitEffects = {};
         this.maxHealth = this.seed.health || 300;
         this.currentHealth = this.maxHealth;
         this.damage = 5;
         this.cooldownReduction = 1;
         this.projectileCount = 1;
+        this.dodgeChance = 1;
         this.experience = 0;
         this.level = 1;
-        this.experienceToLevelUp = this.seed.experiencetolevelup || 5;
+        this.experienceToLevelUp = this.seed.experiencetolevelup || 1;
         this.specialPool = LevelPool.special;
     };
 
@@ -39,7 +42,9 @@ export default class Player extends Entity {
     }
 
     damagePlayerHealth(damage) {
-        this.currentHealth -= damage;
+        if(Math.random() < this.dodgeChance) {
+            this.currentHealth -= damage;
+        };
     };
 
     onDeath() {
@@ -74,6 +79,16 @@ export default class Player extends Entity {
             case "projectile-count":
                 this.projectileCount += 1;
                 break;
+            case "dodge-chance":
+                this.dodgeChance -= 0.05;
+                break;
+            case "projectile-split":
+                if (!this.onHitEffects[upgrade]) {
+                    this.newOnHitEffect(upgrade);
+                } else {
+                    this.onHitEffects[upgrade].increaseSplits(1);
+                };
+                break;
                 
         }
     }
@@ -93,6 +108,17 @@ export default class Player extends Entity {
         }
 
         this.abilities[ability] = abilityInstance;
+    }
+
+    newOnHitEffect(effect) {
+        let onHitInstance;
+        switch (effect) {
+            case "projectile-split":
+                onHitInstance = new ProjectileSplit(this);
+                break;
+        }
+
+        this.onHitEffects[effect] = onHitInstance;
     }
 
     gainExperience(experience) {

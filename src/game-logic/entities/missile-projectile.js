@@ -6,11 +6,15 @@ export default class MissileProjectile extends Projectile {
         super(missileName, missileProperties);
         this.damage = missileProperties.damage;
         this.speed = missileProperties.speed;
+        this.onHitEffects = missileProperties.onhiteffects
+        this.entity = missileProperties.entity;
         this.dimension = [4, 4];
         this.color = "blue";
         this.collide = false;
-        this.sprite = "spriteurl";
+        this.currentSplitCount = 0;
         this.projectileType = "missile";
+        this.constructorProperties = missileProperties;
+        this.sprite = "spriteurl";
     }
 
     directionToTarget() {  //finds target X and Y (assuming the max either can be is 1)
@@ -45,13 +49,21 @@ export default class MissileProjectile extends Projectile {
         };
     };
 
+    triggerOnHitEffects(target) {
+        for (const effect in this.onHitEffects) {
+            let efct = this.onHitEffects[effect]
+            this.entity.game.frameQueue.push(() => { efct.activate(this, target) });
+        };
+    }
+
     doDamage() {
         let targetEnemy = this.collidingEnemy();
         
-        if (targetEnemy) {
+        if (targetEnemy && targetEnemy.currentHealth > 0) {
             targetEnemy.damageEnemyHealth(this.damage);
+            this.triggerOnHitEffects(targetEnemy);
             this.onDeath();
         };
     };
 }
-console.log("missle-projectile.js finished loading");
+console.log("missile-projectile.js finished loading");
