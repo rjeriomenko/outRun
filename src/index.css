@@ -179,3 +179,7 @@ span {
     color: blue;
     font-size: 50px;
 }
+
+audio {
+    visibility: hidden;
+}

@@ -15,5 +15,7 @@
     "p": "escape",
     "P": "escape",
     "Enter": "enter",
-    " ": "enter"
+    " ": "enter",
+    "m": "music",
+    "M": "music"
 }

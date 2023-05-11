@@ -6,6 +6,7 @@ export default class EventHandler {
         this.game = game;
         this.events = [];
         this.triggerEvent();
+        this.musicOn = false;
     };
 
     triggerEvent(event = "mainmenu") {
@@ -37,6 +38,9 @@ export default class EventHandler {
                 let upgradeChoice = document.querySelector(`[data-trigger="${event}"]`)
                 this.game.player.gainUpgrade(upgradeChoice.dataset.upgrade);
                 this.levelUp();
+                break;
+            case "music":
+                this.music();
                 break;
         };
     };
@@ -139,6 +143,7 @@ export default class EventHandler {
         this.hideNode(".game-over-menu");
         this.hideNode(".level-up-menu");
         this.showViewBorder();
+        this.updateMenuMusic()
     }
 
     applyChildSelected(selector) {
@@ -169,6 +174,7 @@ export default class EventHandler {
         this.addEvent("mainmenu");
         this.showNode(".main-menu");
         this.hideViewBorder();
+        this.updateMenuMusic()
     };
 
     restoreFrameQueueAndFrameTimer() {
@@ -193,6 +199,7 @@ export default class EventHandler {
             this.restoreFrameQueueAndFrameTimer();
             this.clearEvent("pause");
             this.hideNode(".pause-menu");
+            this.updateMenuMusic()
 
         } else if (this.emptyEvents()) {
             this.storeFrameQueueAndFrameTimer();
@@ -201,7 +208,9 @@ export default class EventHandler {
             this.game.newPauseFrameTimer(); // allows for setInterval to resume without updating the game
             this.addEvent("pause");
             this.showNode(".pause-menu");
+            this.updateMenuMusic()
         }
+
     }
 
     enter() {
@@ -241,6 +250,7 @@ export default class EventHandler {
             this.hideNode(".game-over-menu");
             this.clearEvents();
             this.game.newFrameTimer();
+            this.updateMenuMusic()
         } else {
             clearInterval(this.game.frameTimer);
             this.game.frameQueue.clearQueue();
@@ -248,6 +258,7 @@ export default class EventHandler {
             this.addEvent("gameover");
             this.applyChildSelected("#game-over-menu-list");
             this.showNode(".game-over-menu");
+            this.updateMenuMusic()
         };
     }
     
@@ -293,6 +304,50 @@ export default class EventHandler {
         this.populateLevelUpChoices();
         this.addEvent("levelup");
         this.showNode(".level-up-menu");
+        };
+    };
+
+    updateMenuMusic() {
+        if (this.musicOn) {
+            this.music();
+            this.music();
+        };
+    };
+
+    turnOffAllMusic() {
+        let mainMenuMusic = document.querySelector(`#mainmenu-music`)
+        let pauseMusic = document.querySelector(`#pause-music`)
+        let ingameMusic = document.querySelector(`#ingame-music`)
+        let gameOverMusic = document.querySelector(`#gameover-music`)
+
+        mainMenuMusic.pause();
+        mainMenuMusic.currentTime = 0;
+
+        pauseMusic.pause();
+        pauseMusic.currentTime = 0;
+
+        ingameMusic.pause();
+        ingameMusic.currentTime = 0;
+
+        gameOverMusic.pause();
+        gameOverMusic.currentTime = 0;
+
+        this.musicOn = false;
+    }
+
+    music() {
+        if (this.musicOn) {debugger
+            this.turnOffAllMusic()
+        } else {
+            this.musicOn = true;
+            let currentEvent = this.events[0];
+            let music;
+            if (currentEvent) {
+                music = document.querySelector(`#${currentEvent}-music`);
+            } else {
+                music = document.querySelector(`#ingame-music`);
+            }
+            music.play();
         };
     };
     
@@ -434,6 +489,12 @@ export default class EventHandler {
             case " ":
                 if (!e.repeat) {
                     this.triggerEvent("enter");
+                }
+                break;
+            case "m":
+            case "M":
+                if (!e.repeat) {
+                    this.triggerEvent("music");
                 }
                 break;
         }
