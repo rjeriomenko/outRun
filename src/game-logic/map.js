@@ -11,9 +11,12 @@ export default class Map {
         this.seed = Map.pickSeed(seed)
         this.background = seed.background;
         this.difficulty = 1;
+        this.difficultyTick = 0;
+        this.difficultyTickMax = 15;
         this.seededEntities = new mapSeedEntityLoader(this.seed.entities); // allows player to reset map with seeded entities at any time
         this.addSeededEntities();
         this.entitySpawner = new EntitySpawner(this);
+        this.activeTimer = 0;
     };
 
     static pickSeed(seed) {
@@ -56,6 +59,14 @@ export default class Map {
         this.entities[highestId] = entity;
         entity.id = highestId;
         entity.map = this;
+    };
+
+    updateEntitySpawner() {
+        console.log(this.entitySpawner.spawnTimer)
+        console.log(this.activeTimer)
+        if (this.activeTimer !== 0) {
+            this.entitySpawner.spawnTimer = 70 - (this.difficulty * 10)
+        }
     };
 }
 console.log("map.js finished loading");

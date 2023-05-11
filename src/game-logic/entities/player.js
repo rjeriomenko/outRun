@@ -29,7 +29,7 @@ export default class Player extends Entity {
         this.dodgeChance = 1;
         this.experience = 0;
         this.level = 1;
-        this.experienceToLevelUp = this.seed.experiencetolevelup || 3;
+        this.experienceToLevelUp = this.seed.experiencetolevelup || 10;
         this.specialPool = LevelPool.special;
     };
 

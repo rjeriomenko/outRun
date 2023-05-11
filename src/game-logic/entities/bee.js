@@ -1,17 +1,18 @@
 console.log("bee.js started loading");
 import Enemy from './enemy.js'
 export default class Bee extends Enemy {
-    constructor(beeName, beeProperties){
+    constructor(beeName, beeProperties, mapDifficulty = 1){
         super(beeName, beeProperties);
+        this.difficulty = mapDifficulty;
         this.dimension = [25, 25];
         this.collide = false;
         this.color = "yellow";
-        this.speed = 4;
+        this.speed = 3.6 + (mapDifficulty * 0.4);
         this.sprite = "spriteurl";
-        this.maxHealth = 4;
+        this.maxHealth = 4 * mapDifficulty;
         this.currentHealth = this.maxHealth;
-        this.experience = 1;
-        this.touchDamage = 1;
+        this.experience = 1 * mapDifficulty;
+        this.touchDamage = 1 * mapDifficulty;
     }
 
     directionToPlayer() {  // finds target X and Y (assuming the min either can be is 1)

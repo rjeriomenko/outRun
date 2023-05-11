@@ -36,7 +36,7 @@ export default class EntitySpawner {
     };
 
     spawnReady() {
-        if (this.spawnCounter === 0) {
+        if (this.spawnCounter <= 0) {
             this.spawnCounter = this.spawnTimer;
             return true;
         } else {
@@ -50,11 +50,11 @@ export default class EntitySpawner {
         switch (enemyType) {
             case "bee":
                 this.beeCount += 1;
-                enemyInstance = new Bee(`bee${this.beeCount}`, { enemytype: "bee" });
+                enemyInstance = new Bee(`bee${this.beeCount}`, { enemytype: "bee" }, this.map.difficulty);
                 break;
             case "zombie":
                 this.zombieCount += 1;
-                enemyInstance = new Zombie(`zombie${this.zombieCount}`, { enemytype: "zombie" });
+                enemyInstance = new Zombie(`zombie${this.zombieCount}`, { enemytype: "zombie" }, this.map.difficulty);
                 break;
         };
 
@@ -105,15 +105,17 @@ export default class EntitySpawner {
         if (this.spawnReady()) {
             let readySpawnPool = this.prepareSpawnPool()
 
-            for(let i = 0; i < this.spawnCount; i++) {
-                let randomIndex = Math.floor(Math.random() * readySpawnPool.length);
-                let enemyType = readySpawnPool[randomIndex]
-                let enemyInstance = this.makePositionlessEnemy(enemyType)
+            if (Object.keys(this.map.entities).length <= 100)  {  // limits the number of map entities to 100 (for performance)
+                for(let i = 0; i < this.spawnCount; i++) {
+                    let randomIndex = Math.floor(Math.random() * readySpawnPool.length);
+                    let enemyType = readySpawnPool[randomIndex]
+                    let enemyInstance = this.makePositionlessEnemy(enemyType)
 
-                this.findSpawnCoords(enemyInstance);
-                while(!this.hasViableSpawnCoords(enemyInstance)) {
                     this.findSpawnCoords(enemyInstance);
-                }
+                    while(!this.hasViableSpawnCoords(enemyInstance)) {
+                        this.findSpawnCoords(enemyInstance);
+                    }
+                };
             };
         };
     };

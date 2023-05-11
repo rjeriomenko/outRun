@@ -184,6 +184,10 @@ export default class EventHandler {
     };
     
     pause() { // clears setInterval and pauses the game
+        if (this.checkEvent("instructions")) {
+            this.instructions();
+        };
+
         if (this.checkEvent("pause")) {
             this.clearListSelected();
             this.restoreFrameQueueAndFrameTimer();

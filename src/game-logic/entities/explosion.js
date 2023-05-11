@@ -39,20 +39,15 @@ export default class Explosion extends Projectile {
     };
 
     doDamage() {
-        debugger
         let targetEntities = this.collidingEntities();
         
 
         for (const entity of targetEntities) {
-            debugger
             if (entity && entity.currentHealth > 0) {
-                debugger
                 if (entity.enemyType) {
-                    debugger
                     entity.damageEnemyHealth(this.damage);
                 } else {
                     entity.damagePlayerHealth(this.damage);
-                    debugger
                 };
             };
         };

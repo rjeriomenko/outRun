@@ -51,6 +51,23 @@ export default class Game {
         this.newFrameTimer()
     }
 
+    advanceMapActiveTimer() {
+        if (this.eventHandler.emptyEvents()) {
+            this.map.activeTimer++;
+        }
+    }
+
+    advanceMapDifficulty() {
+        this.map.difficultyTick = this.map.activeTimer / 60;
+
+        if (this.map.difficultyTick === this.map.difficultyTickMax) {
+            this.map.difficulty += 0.25;
+            this.map.difficultyTickMax += 15;
+        }
+
+        this.map.updateEntitySpawner();
+    }
+
     update() {
         this.logicStep(); // update camera, all positions, statuses, etc
         this.drawFrame(this.ctx, this.canvas, this.map); // draw everything on the map
@@ -131,6 +148,8 @@ export default class Game {
         this.inflictDamage();
         this.checkLevelUp();
         this.frameQueue.frameQueueExecute();
+        this.advanceMapActiveTimer();
+        this.advanceMapDifficulty();
         this.camera.followEntity(); // update camera to new follow coordinates
     };
 

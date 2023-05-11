@@ -1,17 +1,18 @@
 console.log("zombie.js started loading");
 import Enemy from './enemy.js'
 export default class Zombie extends Enemy {
-    constructor(zombieName, zombieProperties) {
+    constructor(zombieName, zombieProperties, mapDifficulty = 1) {
         super(zombieName, zombieProperties);
+        this.difficulty = mapDifficulty;
         this.dimension = [35, 35]
         this.collide = true;
         this.color = "green";
-        this.speed = 2.5;
+        this.speed = 2 + (mapDifficulty * 0.5);
         this.sprite = "spriteurl";
-        this.maxHealth = 8;
+        this.maxHealth = 8 * mapDifficulty;
         this.currentHealth = this.maxHealth;
-        this.experience = 2;
-        this.touchDamage = 3;
+        this.experience = 2 * mapDifficulty;
+        this.touchDamage = 3 * mapDifficulty;
 
     }
 
