@@ -1,7 +1,9 @@
-You can keep your wireframes, implementation timeline, etc. However, you should include a noticeable title and intro summary (for your application), a working live link (routing you to your application’s live GitHub Pages site), and then a breakdown of your integrated features. For each feature, be sure to include a small description of your feature (how users can interact with it), an image or gif of that feature working on your application’s live site, and a cool code snippet (that pertains to that feature). Think of your Production README as a brochure for recruiters.
+outRun()
 
-Background
-outRun() is a top-down 2D action-idle videogame that runs in the browser using vanilla JavaScript and Canvas API. All menus accept both keyboard inputs and mouse input from the user. The user uses WASD or the arrow keys to control a player character and surive in an arena. The map is pre-loaded with obstacles, but enemies will be dynamically created and destroyed during gameplay. The game's camera follows the player's movements around the map. The player character gains experience points and chooses from a random selection of new abilities and upgrades when they collect enough experience points to level up. The player loses the game when they run out of health points. The player's score is determined by how long they survive on the map.
+GitHub Pages link:
+https://rjeriomenko.github.io/outRun/
+
+This is a top-down 2D action-idle videogame that runs in the browser using vanilla JavaScript and Canvas API. All menus accept both keyboard inputs and mouse input from the user. The user uses WASD or the arrow keys to control a player character and surive in an arena. The map is pre-loaded with obstacles, but enemies will be dynamically created and destroyed during gameplay. The game's camera follows the player's movements around the map. The player character gains experience points and chooses from a random selection of new abilities and upgrades when they collect enough experience points to level up. The player loses the game when they run out of health points. The player's score is determined by how long they survive on the map.
 
 
 Functionality & MVPs

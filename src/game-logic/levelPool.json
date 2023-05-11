@@ -13,7 +13,7 @@
             "color": "red"
         },
         "health-regen": {
-            "weighing": 0.6,
+            "weighing": 0.5,
             "color": "green"
         }
     },
@@ -29,17 +29,17 @@
             "count": -1
         },
         "ground-slam": {
-            "weighing": 1,
+            "weighing": 0.5,
             "color": "purple",
             "count": 1
         },
         "attack-explosion": {
-            "weighing": 1,
+            "weighing": 0.2,
             "color": "yellow",
             "count": 1
         },
         "projectile-split": {
-            "weighing": 1,
+            "weighing": 0.1,
             "color": "yellow",
             "count": 2
         },
