@@ -56,7 +56,6 @@ export default class Game {
             this.map.activeTimer++;
         }
         let gameOverScore = document.querySelector("#blue")
-        // console.log(gameOverScore)
         gameOverScore.textContent = `${Math.floor(this.map.activeTimer / 30)}`
     }
 

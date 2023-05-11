@@ -10,7 +10,7 @@ body {
 
 header {
     margin-top: 10px;
-    height: 64px;
+    height: 32px;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
@@ -18,7 +18,7 @@ header {
 
 header img {
     background-color: black;
-    height: 64px;
+    height: 32px;
     width: auto;
     margin: 0px 20px;
     opacity: 0.8;

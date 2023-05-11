@@ -18,7 +18,7 @@ export default class EventHandler {
                 this.pause()
                 break;
             case "play":
-                this.loadMap("test");
+                this.loadMap("primary");
                 break;
             case "enter":
                 this.enter();

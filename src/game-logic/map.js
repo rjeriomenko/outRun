@@ -4,6 +4,7 @@ import mapSeedEntityLoader from './map-seed-entity-loader.js';
 import EntitySpawner from './entity-spawner.js';
 import MainMenuSeed from './map-seeds/main-menu-seed.json';
 import TestSeed from './map-seeds/test-map.json';
+import PrimarySeed from './map-seeds/primary-map.json';
 
 
 export default class Map {
@@ -25,6 +26,8 @@ export default class Map {
                 return MainMenuSeed;
             case "test":
                 return TestSeed;
+            case "primary":
+                return PrimarySeed;
         }
     }
 
