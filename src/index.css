@@ -27,9 +27,9 @@ li {
 .main-menu {
     position: fixed;
     background-color: clear;
-    width: 600px;
-    height: 598px;
-    margin-top: 102px;
+    width: 597px;
+    height: 597px;
+    margin-top: 97px;
     flex-direction: column;
     visibility: hidden;
 }
@@ -37,9 +37,9 @@ li {
 .pause-menu {
     position: fixed;
     background-color: clear;
-    width: 600px;
-    height: 598px;
-    margin-top: 102px;
+    width: 597px;
+    height: 597px;
+    margin-top: 97px;
     visibility: hidden;
     border: solid 4px white;
 }
@@ -47,9 +47,9 @@ li {
 .instructions-menu {
     position: fixed;
     background-color: clear;
-    width: 600px;
-    height: 598px;
-    margin-top: 102px;
+    width: 597px;
+    height: 597px;
+    margin-top: 97px;
     visibility: hidden;
     border: solid 4px white;
 }
@@ -57,9 +57,9 @@ li {
 .game-over-menu {
     position: fixed;
     background-color: clear;
-    width: 600px;
-    height: 598px;
-    margin-top: 102px;
+    width: 597px;
+    height: 597px;
+    margin-top: 97px;
     visibility: hidden;
     border: solid 4px white;
 }
@@ -67,9 +67,9 @@ li {
 .level-up-menu {
     position: fixed;
     background-color: clear;
-    width: 600px;
-    height: 598px;
-    margin-top: 102px;
+    width: 597px;
+    height: 597px;
+    margin-top: 97px;
     visibility: hidden;
     border: solid 4px white;
 }

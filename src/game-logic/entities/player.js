@@ -8,6 +8,7 @@ import Missile from '../abilities/missile.js';
 import MainMenuAbility from '../abilities/main-menu-ability.js';
 import Regen from '../abilities/regen.js';
 import ProjectileSplit from '../abilities/projectile-split.js';
+import AttackExplosion from '../abilities/attack-explosion.js';
 
 
 export default class Player extends Entity {
@@ -28,7 +29,7 @@ export default class Player extends Entity {
         this.dodgeChance = 1;
         this.experience = 0;
         this.level = 1;
-        this.experienceToLevelUp = this.seed.experiencetolevelup || 1;
+        this.experienceToLevelUp = this.seed.experiencetolevelup || 3;
         this.specialPool = LevelPool.special;
     };
 
@@ -68,7 +69,7 @@ export default class Player extends Entity {
                 };
                 break;
             case "run-speed":
-                this.speed += 1
+                this.speed += 0.5
                 break;
             case "damage":
                 this.damage += 2
@@ -88,6 +89,9 @@ export default class Player extends Entity {
                 } else {
                     this.onHitEffects[upgrade].increaseSplits(1);
                 };
+                break;
+            case "attack-explosion":
+                this.newOnHitEffect(upgrade);
                 break;
                 
         }
@@ -115,6 +119,9 @@ export default class Player extends Entity {
         switch (effect) {
             case "projectile-split":
                 onHitInstance = new ProjectileSplit(this);
+                break;
+            case "attack-explosion":
+                onHitInstance = new AttackExplosion(this);
                 break;
         }
 

@@ -4,7 +4,8 @@ import Ability from './ability.js';
 export default class ProjectileSplit extends Ability {
     constructor(player) {
         super(player);
-        this.maxSplits = 1
+        this.maxSplits = 1;
+        this.splitCount = 0;
     }
 
     randomSign() {
@@ -38,6 +39,8 @@ export default class ProjectileSplit extends Ability {
             instance2.currentSplitCount += 1
             this.entity.map.addEntity(instance1)
             this.entity.map.addEntity(instance2)
+
+            this.splitCount++
         }
     }
 }

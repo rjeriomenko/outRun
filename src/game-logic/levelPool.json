@@ -41,7 +41,7 @@
         "projectile-split": {
             "weighing": 0.2,
             "color": "yellow",
-            "count": -1
+            "count": 3
         },
         "dodge-chance": {
             "weighing": 0.5,
