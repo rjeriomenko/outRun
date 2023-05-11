@@ -35,12 +35,15 @@ export default class ProjectileSplit extends Ability {
             instance1.absolutePosition = this.offsetFireCoords(sourceEntity.absolutePosition);
             instance2.absolutePosition = this.offsetFireCoords(sourceEntity.absolutePosition);
     
-            instance1.currentSplitCount += 1
-            instance2.currentSplitCount += 1
-            this.entity.map.addEntity(instance1)
-            this.entity.map.addEntity(instance2)
+            instance1.currentSplitCount += 1;
+            instance2.currentSplitCount += 1;
+            this.entity.map.addEntity(instance1);
+            this.entity.map.addEntity(instance2);
 
-            this.splitCount++
+            instance1.missileCountCheck();
+            instance2.missileCountCheck();
+
+            this.splitCount++;
         }
     }
 }

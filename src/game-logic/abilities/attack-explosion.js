@@ -7,11 +7,11 @@ export default class AttackExplosion extends Ability {
         super(player);
         this.duration = 6;
         this.explosionCount = 0;
-        this.dimension = [70, 70]
+        this.dimension = [100, 100]
     }
 
     updateStats() {
-        this.damage = this.entity.damage / 15;
+        this.damage = this.entity.damage / 10;
         if (this.entity.id === "player") {
             this.friendly = true;
         } else {
@@ -36,8 +36,11 @@ export default class AttackExplosion extends Ability {
 
     activate(sourceEntity, targetEntity) {
         this.updateStats();
-        this.explosionCount++;
-        let offsetFireCoords = this.offsetFireCoords(sourceEntity.findEntityCenterCoords(targetEntity))
+        this.explosionCount++
+        let sourceCoords = sourceEntity.findEntityCenterCoords(sourceEntity)
+        let adjustedX = sourceCoords[0] - (this.dimension[0] / 2);
+        let adjustedY = sourceCoords[1] - (this.dimension[1] / 2);
+        let offsetFireCoords = this.offsetFireCoords([adjustedX, adjustedY])
         let explosionProperties = {
             "damage": this.damage,
             "friendly": this.friendly,

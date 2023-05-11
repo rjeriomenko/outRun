@@ -62,11 +62,14 @@ export default class Map {
     };
 
     updateEntitySpawner() {
-        console.log(this.entitySpawner.spawnTimer)
-        console.log(this.activeTimer)
         if (this.activeTimer !== 0) {
-            this.entitySpawner.spawnTimer = 70 - (this.difficulty * 10)
-        }
+            let newSpawnTimer = this.entitySpawner.spawnTimer = 60 - (this.difficulty * 20);
+            if (newSpawnTimer <= 10) {
+                this.entitySpawner.spawnTimer = 10  // at most 4 enemies a second can spawn
+            } else {
+                this.entitySpawner.spawnTimer = newSpawnTimer
+            };
+        };
     };
 }
 console.log("map.js finished loading");

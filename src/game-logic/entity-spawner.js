@@ -35,7 +35,36 @@ export default class EntitySpawner {
         return readySpawnPool;
     };
 
-    spawnReady() {
+    spawnReady() {  // plays a big part in keeping the game lively
+        if (
+            Object.keys(this.map.entities).length < 25 &&
+            this.spawnCounter > 1 &&
+            this.map.activeTimer !== 0
+        ) {
+            this.spawnCounter = 1;
+            return this.spawnReady();
+        }
+
+        if (
+            Object.keys(this.map.entities).length < 60 && 
+            this.spawnCounter > 1 && 
+            this.map.activeTimer !== 0 &&
+            this.map.difficulty > 3
+        ) {
+            this.spawnCounter = 1;
+            return this.spawnReady();
+        }
+
+        if (
+            Object.keys(this.map.entities).length < 80 &&
+            this.spawnCounter > 1 &&
+            this.map.activeTimer !== 0 &&
+            this.map.difficulty > 5
+        ) {
+            this.spawnCounter = 1;
+            return this.spawnReady();
+        }
+
         if (this.spawnCounter <= 0) {
             this.spawnCounter = this.spawnTimer;
             return true;

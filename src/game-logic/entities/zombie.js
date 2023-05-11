@@ -7,12 +7,13 @@ export default class Zombie extends Enemy {
         this.dimension = [35, 35]
         this.collide = true;
         this.color = "green";
-        this.speed = 2 + (mapDifficulty * 0.5);
+        this.speed = 2.4 + (mapDifficulty * 0.5);
         this.sprite = "spriteurl";
         this.maxHealth = 8 * mapDifficulty;
         this.currentHealth = this.maxHealth;
         this.experience = 2 * mapDifficulty;
         this.touchDamage = 3 * mapDifficulty;
+        this.duration = 1500;
 
     }
 

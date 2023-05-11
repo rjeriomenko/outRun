@@ -19,9 +19,9 @@
     },
     "special": {
         "ability-cooldown": {
-            "weighing": 0.4,
+            "weighing": 0.7,
             "color": "pink",
-            "count": 5
+            "count": 8
         },
         "projectile-count": {
             "weighing": 0.3,
@@ -34,19 +34,19 @@
             "count": 1
         },
         "attack-explosion": {
-            "weighing": 0.2,
+            "weighing": 1,
             "color": "yellow",
             "count": 1
         },
         "projectile-split": {
-            "weighing": 0.2,
+            "weighing": 0.1,
             "color": "yellow",
-            "count": 3
+            "count": 2
         },
         "dodge-chance": {
             "weighing": 0.5,
             "color": "aquamarine",
-            "count": 10
+            "count": 3
         }
     }
 }

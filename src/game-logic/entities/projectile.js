@@ -7,8 +7,13 @@ export default class Projectile extends Entity {
     };
 
     move() {
-        let directionCoords = this.directionToTarget();
-        super.move(directionCoords);
+        if (this.duration > 0) {
+            this.duration--
+            let directionCoords = this.directionToTarget();
+            super.move(directionCoords);
+        } else {
+            this.onDeath();
+        };
     };
 }
 

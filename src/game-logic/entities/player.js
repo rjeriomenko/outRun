@@ -60,6 +60,7 @@ export default class Player extends Entity {
         switch (upgrade) {
             case "max-health": 
                 this.maxHealth += 60;
+                this.currentHealth += 60;
                 break;
             case "health-regen":
                 if (!this.abilities[upgrade]) {
@@ -72,7 +73,7 @@ export default class Player extends Entity {
                 this.speed += 0.5
                 break;
             case "damage":
-                this.damage += 2
+                this.damage += 3 + (this.map.difficulty / 2)
                 break;
             case "ability-cooldown":
                 this.cooldownReduction -= 0.1;
@@ -81,7 +82,7 @@ export default class Player extends Entity {
                 this.projectileCount += 1;
                 break;
             case "dodge-chance":
-                this.dodgeChance -= 0.05;
+                this.dodgeChance -= 0.22;
                 break;
             case "projectile-split":
                 if (!this.onHitEffects[upgrade]) {

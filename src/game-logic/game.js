@@ -140,7 +140,22 @@ export default class Game {
         this.player.gainExperience(0);
     }
 
+    clearExpiredEnemies() {
+        for (const entity in this.map.entities) {
+            let ent = this.map.entities[entity];
+            if(ent.duration && ent.enemyType) {
+            console.log(ent.duration)
+                if (ent.duration <= 1) {
+                    ent.lessXPDeath()
+                } else {
+                    ent.duration--;
+                };
+            };
+        };
+    };
+
     logicStep() {
+        this.clearExpiredEnemies()
         this.spawnEnemies();
         this.activateAbilities();
         this.moveEnemies();

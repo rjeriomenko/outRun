@@ -13,6 +13,7 @@ export default class Bee extends Enemy {
         this.currentHealth = this.maxHealth;
         this.experience = 1 * mapDifficulty;
         this.touchDamage = 1 * mapDifficulty;
+        this.duration = 1500;
     }
 
     directionToPlayer() {  // finds target X and Y (assuming the min either can be is 1)

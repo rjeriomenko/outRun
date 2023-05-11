@@ -9,6 +9,7 @@ export default class MissileProjectile extends Projectile {
         this.onHitEffects = missileProperties.onhiteffects
         this.entity = missileProperties.entity;
         this.dimension = [4, 4];
+        this.duration = 120;
         this.color = "blue";
         this.collide = false;
         this.currentSplitCount = 0;
@@ -62,6 +63,19 @@ export default class MissileProjectile extends Projectile {
         if (targetEnemy && targetEnemy.currentHealth > 0) {
             targetEnemy.damageEnemyHealth(this.damage);
             this.triggerOnHitEffects(targetEnemy);
+            this.onDeath();
+        };
+    };
+
+    missileCountCheck() {
+        let missileCount = 0;
+        for (const entity in this.map.entities) {
+            if(entity.projectileType === "missile") {
+                missileCount++;
+            };
+        };
+
+        if (missileCount > 20) {
             this.onDeath();
         };
     };

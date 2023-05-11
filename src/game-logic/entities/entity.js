@@ -132,8 +132,8 @@ export default class Entity {
         return Math.sqrt(deltaX ** 2 + deltaY ** 2);
     }
 
-    rewardExperience() {
-        this.map.entities.player.gainExperience(this.experience);
+    rewardExperience(percentage = 1) {
+        this.map.entities.player.gainExperience(this.experience * percentage);
     }
 
     onDeath() {
@@ -142,5 +142,15 @@ export default class Entity {
         if(this.enemyType) { this.rewardExperience() };
         delete this.map.entities[id];
     };
+
+    lessXPDeath() {
+        let id = this.id;
+
+        if (this.enemyType) { this.rewardExperience(0.2) };
+        delete this.map.entities[id];
+    }
+
+
+
 }
 console.log("entity.js finished loading");
