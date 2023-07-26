@@ -10,9 +10,7 @@ In outRun, users will be able to:
 1. Navigate an arena with WASD and arrow keys.
 
 ```js
-function() {
-    return 1 + 1;
-}
+
 ```
 <!-- Incorporate an image of your code or a code snippet: -->
 <!-- Incoporate either an image or gif of your game in action, displaying this feature. -->
