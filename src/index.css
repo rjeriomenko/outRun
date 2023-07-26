@@ -175,6 +175,14 @@ span {
     color: red;
 }
 
+#green {
+    color: green;
+}
+
+#yellow {
+    color: yellow;
+}
+
 #blue {
     color: blue;
     font-size: 50px;
